@@ -1,5 +1,8 @@
 package cn.com.leadfar.cms.backend.view;
 
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Random;
 
 /**
@@ -25,13 +29,13 @@ public class CheckcodeServlet extends HttpServlet {
     //将servlet的配置信息放到init里,init初始化
     public void init(ServletConfig config) throws ServletException {
         width = Integer.parseInt(config.getInitParameter("width"));
-        height = Integer.parseInt(config.getInitParameter("heigth"));
+        height = Integer.parseInt(config.getInitParameter("height"));
         number = Integer.parseInt(config.getInitParameter("number"));
         codes = config.getInitParameter("codes");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       // response.getContentType("image/jpeg");出错了？？？
+        response.setContentType("image/jpeg");
         //创建一张图片
         BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_3BYTE_BGR);
         Graphics2D g = image.createGraphics();
@@ -65,11 +69,19 @@ public class CheckcodeServlet extends HttpServlet {
             g.drawOval(random.nextInt(width),random.nextInt(height),1,1);
         }
 
-    }
+        OutputStream out = response.getOutputStream();
+        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+        encoder.encode(image);
+        out.flush();
+        out.close();
+        }
+
+
     //从max到min随机生成一个数
+    //生成5~15之间的数
     private int random(int max,int min){
-       int m =  new Random().nextInt(9999)%(max-min);
-        return m;
+       int m =  new Random().nextInt(999999)%(max-min);
+        return m + min;
     }
 
 }

@@ -9,7 +9,7 @@
 		<servlet-class>cn.com.leadfar.cms.backend.view.CheckcodeServlet</servlet-class>
 		<init-param>
 			<param-name>width</param-name>
-			<param-value>44</param-value>
+			<param-value>52</param-value>
 		</init-param>
 		<init-param>
 			<param-name>height</param-name>
@@ -26,7 +26,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>CheckcodeServlet</servlet-name>
-		<url-pattern>/backend/images/checkcode.jsp</url-pattern>
+		<url-pattern>/backend/images/checkcode.jpg</url-pattern>
 	</servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

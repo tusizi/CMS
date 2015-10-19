@@ -6,5 +6,5 @@ function form_reset(){
 }
 function reloadcode(){
     var verify=document.getElementById('safecode');
-    verify.setAttribute('src','code.php?'+Math.random());
+    verify.setAttribute('src','images/checkcode.jpg?'+Math.random());
 }
