@@ -49,6 +49,7 @@ public class CheckcodeServlet extends HttpServlet {
         int x =(width-1) /number;
         int y =height-4;
         //随机生成一个字符
+        StringBuffer sb = new StringBuffer();
         Random random = new Random();
         for(int i = 0; i<number; i++){
            String code = String.valueOf(codes.charAt(random.nextInt(codes.length())));
@@ -59,7 +60,10 @@ public class CheckcodeServlet extends HttpServlet {
             Font font = new Font("Arial",Font.PLAIN,random(height/2,height));
             g.setFont(font);
             g.drawString(code,i*x+1,y);
+            sb.append(code);
         }
+        //将验证码放到http session中
+        request.getSession().setAttribute("codes",sb.toString());
         //随机生成一些点
         for(int i =0;i<50;i++){
             int red =random.nextInt(255);

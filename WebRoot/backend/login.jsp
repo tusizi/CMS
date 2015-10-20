@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+//<%@taglib prefix="c" uri =""%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/backend/";
@@ -20,23 +21,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 <div id="top"> </div>
-<form id="login" action="main.jsp" method="post">
+<form id="login" action="LoginServlet" method="post">
   <div id="center">
+
     <div id="center_left"></div>
     <div id="center_middle">
+      <div>${error}</div>
       <div class="user">
         <label>用户名：
-        <input type="text" name="user" id="user" />
+        <input type="text" name="username" id="user" value="${param.username}" />
         </label>
       </div>
       <div class="user">
         <label>密　码：
-        <input type="password" name="pwd" id="pwd" />
+        <input type="password" name="password" id="pwd" value="${param.password}" />
         </label>
       </div>
       <div class="chknumber">
         <label>验证码：
-        <input name="chknumber" type="text" id="chknumber" maxlength="4" class="chknumber_input" />
+        <input name="checkcode" type="text" id="chknumber" maxlength="4" class="chknumber_input" />
         </label>
         <img src="images/checkcode.jpg" id="safecode" onclick="reloadcheckcode(this)" title="如果看不清，请点击刷新" />
       </div>
