@@ -62,9 +62,10 @@ public class LoginServlet extends HttpServlet {
             DBUtil.close(pstmt);
             DBUtil.close(conn);
         }
+        //需要将用户的信息存放到http session中
+       request.getSession().setAttribute("LOGIN_ADMIN", username);
 
-
-        //判断通过，撞到main.jsp页面
+        //判断通过，转到main.jsp页面
         response.sendRedirect(request.getContextPath()+"/backend/main.jsp");
 
     }
