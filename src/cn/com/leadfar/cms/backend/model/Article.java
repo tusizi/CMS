@@ -1,4 +1,4 @@
-package cn.com.leadfar.cms.backend.modle;
+package cn.com.leadfar.cms.backend.model;
 
 /**
  * Created by tusizi on 2015/10/22.

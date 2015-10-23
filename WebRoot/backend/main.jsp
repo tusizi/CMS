@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%--<%@ taglib prefix="c" uri="" %>--%>
+<%@ taglib prefix="c" uri="/jstl-examples-taglib" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/backend/";
@@ -11,9 +11,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<base href="<%=basePath%>">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>CMS 后台管理工作平台</title>
-	<%--<c:if test = "$(empty LOGIN_ADMIN)">--%>
-		<%--<c:redirect url ="login.jsp"/>--%>
-	<%--</c:if>--%>
+	<c:if test = "$(empty LOGIN_ADMIN)">
+		<c:redirect url ="login.jsp"/>
+	</c:if>
 </head>
 <frameset rows="127,*,11" frameborder="no" border="0" framespacing="0">
 	<frame src="top.jsp" name="topFrame" scrolling="No"
