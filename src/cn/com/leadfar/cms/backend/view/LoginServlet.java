@@ -28,6 +28,7 @@ public class LoginServlet extends HttpServlet {
             String sessionCode = (String) request.getSession().getAttribute("codes");//得到的不是string类型吗
             if(!sessionCode.equalsIgnoreCase(checkcode)){
                 //网页重定向forward到login.jsp页面
+                //请求转发
                 request.setAttribute("error","验证码错误");
                 request.getRequestDispatcher("/backend/login.jsp").forward(request,response);
                 return;
@@ -47,11 +48,11 @@ public class LoginServlet extends HttpServlet {
                 //密码是否正确
                 if(!password.equals(pass)){
                     request.setAttribute("error","密码不正确");
-                    request.getRequestDispatcher(request.getContextPath()+"/backend/login.jsp");
+                    request.getRequestDispatcher(request.getContextPath()+"/backend/login.jsp").forward(request,response);
                     return;
                 }else{
                     request.setAttribute("error","用户不存在");
-                    request.getRequestDispatcher(request.getContextPath()+"/backend/login.jsp");
+                    request.getRequestDispatcher(request.getContextPath()+"/backend/login.jsp").forward(request,response);
                     return;
                 }
             }
@@ -66,6 +67,7 @@ public class LoginServlet extends HttpServlet {
        request.getSession().setAttribute("LOGIN_ADMIN", username);
 
         //判断通过，转到main.jsp页面
+        //重定向
         response.sendRedirect(request.getContextPath()+"/backend/main.jsp");
 
     }

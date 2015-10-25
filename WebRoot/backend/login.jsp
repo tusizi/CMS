@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-//???????????<%@taglib prefix="c" uri =""%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/backend/";
@@ -11,6 +11,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<base href="<%=basePath%>">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>CMS 后台管理工作平台</title>
+
+    <c:if test = "$(empty LOGIN_ADMIN)">
+        <c:redirect url ="login.jsp"/>
+    </c:if>
 	<link rel="stylesheet" type="text/css" href="css/style.css"/>
 	<script type="text/javascript" src="js/js.js"></script>
   <script type="text/javascript">
