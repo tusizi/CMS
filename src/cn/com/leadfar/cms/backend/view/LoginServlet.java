@@ -19,7 +19,7 @@ import java.sql.SQLException;
 @WebServlet(name = "LoginServlet")
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doPost(request, response);
+        //super.doPost(request, response);
         String username =  request.getParameter("username");
         String password = request.getParameter("password");
         String checkcode = request.getParameter("checkcode");
@@ -42,20 +42,20 @@ public class LoginServlet extends HttpServlet {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
             rs = pstmt.executeQuery();
-            String pass = rs.getString("password");
+
             //系统判断用户名是否存在
             if(rs.next()){
+                String pass = rs.getString("password");
                 //密码是否正确
                 if(!password.equals(pass)){
                     request.setAttribute("error","密码不正确");
-                    request.getRequestDispatcher(request.getContextPath()+"/backend/login.jsp").forward(request,response);
-                    return;
+                    request.getRequestDispatcher("/backend/login.jsp").forward(request,response);
+                    return;}
                 }else{
                     request.setAttribute("error","用户不存在");
-                    request.getRequestDispatcher(request.getContextPath()+"/backend/login.jsp").forward(request,response);
+                    request.getRequestDispatcher("/backend/login.jsp").forward(request,response);
                     return;
                 }
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -69,7 +69,5 @@ public class LoginServlet extends HttpServlet {
         //判断通过，转到main.jsp页面
         //重定向
         response.sendRedirect(request.getContextPath()+"/backend/main.jsp");
-
     }
-
 }

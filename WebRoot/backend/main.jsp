@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="/jstl-examples-taglib" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@include file="common/taglib.jsp"%>这里的路径应该怎么写--%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/backend/";
@@ -14,6 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<c:if test = "$(empty LOGIN_ADMIN)">
 		<c:redirect url ="login.jsp"/>
 	</c:if>
+
 </head>
 <frameset rows="127,*,11" frameborder="no" border="0" framespacing="0">
 	<frame src="top.jsp" name="topFrame" scrolling="No"

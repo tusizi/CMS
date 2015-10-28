@@ -1,5 +1,7 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="/backend/common/taglib.jsp"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/backend/";
@@ -114,11 +116,13 @@ td {
         <td width="70" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">发布时间</span></div></td>
         <td width="100" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">基本操作</span></div></td>
       </tr>
+     <c:if test="${not empty articles}">
+       <c:forEach items="${articles}" var="a">
       <tr>
         <td height="20" bgcolor="#FFFFFF"><div align="center">
           <input type="checkbox" name="checkbox2" id="checkbox2" />
         </div></td>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><a href="#" title="点击查看和编辑文章">JBPM实例介绍之一</a></div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><a href="#" title="点击查看和编辑文章">${a.title}</a></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">http://www.leadfar.org</div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">20</div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">5</div></td>
@@ -131,6 +135,13 @@ td {
         <a href="#" title="点击编辑文章">编辑</a>
         </div></td>
       </tr>
+       </c:forEach>
+     </c:if>
+      <c:if test="${empty articles}">
+        <tr>
+          <td width="100" height="20" colspan="9" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">没有文章可以显示</span></div></td>
+        </tr>
+      </c:if>
     </table></td>
   </tr>
   <tr>
