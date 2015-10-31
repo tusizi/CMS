@@ -20,19 +20,19 @@ import java.sql.SQLException;
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //super.doPost(request, response);
-        String username =  request.getParameter("username");
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
         String checkcode = request.getParameter("checkcode");
         //系统判断验证码是否正确
         //刚刚生成的验证码串
-            String sessionCode = (String) request.getSession().getAttribute("codes");//得到的不是string类型吗
-            if(!sessionCode.equalsIgnoreCase(checkcode)){
-                //网页重定向forward到login.jsp页面
-                //请求转发
-                request.setAttribute("error","验证码错误");
-                request.getRequestDispatcher("/backend/login.jsp").forward(request,response);
-                return;
-            }
+        String sessionCode = (String) request.getSession().getAttribute("codes");//得到的不是string类型吗
+        if (!sessionCode.equalsIgnoreCase(checkcode)) {
+            //网页重定向forward到login.jsp页面
+            //请求转发
+            request.setAttribute("error", "验证码错误");
+            request.getRequestDispatcher("/backend/login.jsp").forward(request, response);
+            return;
+        }
         //系统判断用户名是否存在，密码是否正确
         String sql = "select * from t_cms where username = ?";
         Connection conn = DBUtil.getConn();
@@ -44,30 +44,31 @@ public class LoginServlet extends HttpServlet {
             rs = pstmt.executeQuery();
 
             //系统判断用户名是否存在
-            if(rs.next()){
+            if (rs.next()) {
                 String pass = rs.getString("password");
                 //密码是否正确
-                if(!password.equals(pass)){
-                    request.setAttribute("error","密码不正确");
-                    request.getRequestDispatcher("/backend/login.jsp").forward(request,response);
-                    return;}
-                }else{
-                    request.setAttribute("error","用户不存在");
-                    request.getRequestDispatcher("/backend/login.jsp").forward(request,response);
+                if (!password.equals(pass)) {
+                    request.setAttribute("error", "密码不正确");
+                    request.getRequestDispatcher("/backend/login.jsp").forward(request, response);
                     return;
                 }
+            } else {
+                request.setAttribute("error", "用户不存在");
+                request.getRequestDispatcher("/backend/login.jsp").forward(request, response);
+                return;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             DBUtil.close(rs);
             DBUtil.close(pstmt);
             DBUtil.close(conn);
         }
         //需要将用户的信息存放到http session中
-       request.getSession().setAttribute("LOGIN_ADMIN", username);
+        request.getSession().setAttribute("LOGIN_ADMIN", username);
 
         //判断通过，转到main.jsp页面
         //重定向
-        response.sendRedirect(request.getContextPath()+"/backend/main.jsp");
+        response.sendRedirect(request.getContextPath() + "/backend/main.jsp");
     }
 }

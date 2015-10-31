@@ -16,6 +16,6 @@ public class LogoutServlet extends HttpServlet {
         //清空http session 销毁session  结束回话
         request.getSession().invalidate();
         //返回login.jsp
-        response.sendRedirect(request.getContextPath()+"/backend/login.jsp");
+        response.sendRedirect(request.getContextPath() + "/backend/login.jsp");
     }
 }
