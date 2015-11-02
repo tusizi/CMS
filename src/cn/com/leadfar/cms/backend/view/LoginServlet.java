@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         //系统判断用户名是否存在，密码是否正确
-        String sql = "select * from t_cms where username = ?";
+        String sql = "select * from t_admin where username = ?";
         Connection conn = DBUtil.getConn();
         PreparedStatement pstmt = null;
         ResultSet rs = null;

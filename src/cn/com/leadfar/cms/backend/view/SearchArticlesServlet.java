@@ -30,6 +30,7 @@ public class SearchArticlesServlet extends HttpServlet {
             articles.add(a);
         }
         request.setAttribute("articles", articles);
+        System.out.println(articles);
         //forward到article_list.jsp
         request.getRequestDispatcher("/backend/article/article_list.jsp").forward(request, response);
     }

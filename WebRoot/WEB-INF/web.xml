@@ -59,6 +59,15 @@
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/backend/*</url-pattern>
     </filter-mapping>
+    
+    <servlet>
+        <servlet-name>SearchArticlesServlet</servlet-name>
+        <servlet-class>cn.com.leadfar.cms.backend.view.SearchArticlesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchArticlesServlet</servlet-name>
+        <url-pattern>/backend/SearchArticlesServlet</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

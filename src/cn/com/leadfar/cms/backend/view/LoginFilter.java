@@ -28,7 +28,7 @@ public class LoginFilter implements javax.servlet.Filter {
         String page = requestURI.substring(request.getContextPath().length());
         //字符串是否匹配filterPattern
         if (page.matches(filterPattern)) {
-            if (loginAdmin == null && !page.equals("/backend/login.jsp") && !page.equals("/backend/oginServlet")) {
+            if (loginAdmin == null && !page.equals("/backend/login.jsp") && !page.equals("/backend/LoginServlet")) {
                 //重定向到login.jsp页面
                 response.sendRedirect(request.getContextPath() + "/backend/login.jsp");
             }
