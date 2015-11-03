@@ -68,6 +68,14 @@
         <servlet-name>SearchArticlesServlet</servlet-name>
         <url-pattern>/backend/SearchArticlesServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AddArticleServlet</servlet-name>
+        <servlet-class>cn.com.leadfar.cms.backend.view.AddArticleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddArticleServlet</servlet-name>
+        <url-pattern>/backend/AddArticleServlet</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
