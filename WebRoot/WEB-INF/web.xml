@@ -76,6 +76,14 @@
         <servlet-name>AddArticleServlet</servlet-name>
         <url-pattern>/backend/AddArticleServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>DelAticlesServlet</servlet-name>
+        <servlet-class>cn.com.leadfar.cms.backend.view.DelArticlesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DelAticlesServlet</servlet-name>
+        <url-pattern>/backend/DelArticlesServlet</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

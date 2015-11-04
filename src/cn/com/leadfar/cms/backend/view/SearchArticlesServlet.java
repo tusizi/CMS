@@ -23,10 +23,6 @@ import java.util.logging.SimpleFormatter;
  */
 @WebServlet(name = "SearchArticlesServlet")
 public class SearchArticlesServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //查询文章列表
         List articles = new ArrayList();//定义一个文章列表
@@ -40,6 +36,7 @@ public class SearchArticlesServlet extends HttpServlet {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-DD HH-MM-SS");
             while(rs.next()){
                 Article article = new Article();
+                article.setId(rs.getInt("id"));
                 article.setTitle(rs.getString("title"));
                 article.setContext(rs.getString("content"));
                 article.setSource(rs.getString("source"));
