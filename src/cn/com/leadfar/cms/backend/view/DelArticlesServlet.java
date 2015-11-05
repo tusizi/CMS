@@ -20,8 +20,10 @@ public class DelArticlesServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //从界面获取删除文章的id
-        String id = request.getParameter("id");
-        if (id == null){
+       // String id = request.getParameter("id");
+        //从界面获得一组id 值
+        String[] ids = request.getParameterValues("id");
+        if (ids == null){
             //提示错误 forward 到错误页面
             request.setAttribute("error","无法删除文章，ID不允许为空");
             request.getRequestDispatcher("/backend/common/error.jsp").forward(request,response);
@@ -31,9 +33,11 @@ public class DelArticlesServlet extends HttpServlet {
         String sql = "delete from t_article where id = ?";
         PreparedStatement pstmt = null;
         try {
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, Integer.parseInt(id));
-            pstmt.executeUpdate();
+            for(int i =0; i<ids.length; i++){
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setInt(1, Integer.parseInt(ids[i]));
+                pstmt.executeUpdate();
+            }
             //什么意思？？？？？？
             conn.commit();
         } catch (SQLException e) {

@@ -101,7 +101,7 @@ fieldset div {
 <div id="formwrapper">
 	<h3>添加文章成功</h3>
 	<div class="enter">
-	    <input name="addArticle" type="button" class="buttom" value="继续添加文章" onclick="window.location = 'add_article.jsp'"/>
+	    <input name="addArticle" type="button" class="buttom" value="继续添加文章" onclick="window.location = 'article/add_article.jsp'"/>
 	    <input name="return" type="button" class="buttom" value="返回列表页面" onclick="window.location = 'SearchArticlesServlet'"/>
 	</div>
 </div>

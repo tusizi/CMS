@@ -77,6 +77,45 @@ td {
 }
 -->
 </style>
+  <script type="text/javascript">
+    function selectAll(field){
+      //判断顶上的checkedbox的选中状态
+      //alert(filed.checked);
+      //根据checkbox的名称，获取所有被选中的checkbox框对象
+      var  idCheckboxs = document.getElementsByName("id");
+      for(var i = 0; i<idCheckboxs.length; i++){
+        //判断顶上的checkedbox的选中状态
+        if(field.checked){
+          idCheckboxs[i].checked = true;
+        }else{
+          idCheckboxs[i].checked = false;
+        }
+      }
+    }
+
+    function del(){
+      //判断有哪些checkedboxs框被选中
+      var idCheckboxs = document.getElementsByName("id");
+      var url ="DelArticleServlet";
+      var checkedIds =[];
+      for(var i=0;i<idCheckboxs.length;i++){
+        if(idCheckboxs[i].checked){
+          //把选中的checkboxs框的value也就是它们的id值放入checkIds数组
+            checkedIds[checkedIds.length] = idCheckboxs[i].value;
+        }
+      }
+      for(var i=0;i<checkedIds.length;i++){
+        if(i==0){
+          url = url+"?id="+checkedIds[i];
+        }else{
+          url = url+"&id="+checkedIds[i];
+        }
+      }
+      //通过GET方式向后台递交一个请求
+      alert(url);
+      window.location = url;
+    }
+  </script>
 </head>
 <body>
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -94,7 +133,7 @@ td {
             <td><div align="right"><span class="STYLE1">
              &nbsp;&nbsp;<img src="images/add.gif" width="10" height="10" /> <a href="article/add_article.jsp">添加</a>
              &nbsp;&nbsp;<img src="images/edit.gif" width="10" height="10" /> <a href="#">发布</a>
-             &nbsp; <img src="images/del.gif" width="10" height="10" /> <a href="#">删除</a>    &nbsp;&nbsp;   &nbsp;
+             &nbsp; <img src="images/del.gif" width="10" height="10" /> <a href="javascript:del()">删除</a>    &nbsp;&nbsp;   &nbsp;
              </span><span class="STYLE1"> &nbsp;</span></div></td>
           </tr>
         </table></td>
@@ -106,7 +145,7 @@ td {
     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce">
       <tr>
         <td width="4%" height="20" bgcolor="d3eaef" class="STYLE10"><div align="center">
-          <input type="checkbox" name="checkbox" id="checkbox" />
+          <input type="checkbox" name="checkbox" onclick = "selectAll(this)" />
         </div></td>
         <td width="100" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">文章标题</span></div></td>
         <td width="50" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">文章来源</span></div></td>
@@ -121,7 +160,7 @@ td {
        <c:forEach items="${articles}" var="a">
       <tr>
         <td height="20" bgcolor="#FFFFFF"><div align="center">
-          <input type="checkbox" name="checkbox2" id="checkbox2" />
+          <input type="checkbox" name="id" value="${a.id}" />
         </div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><a href="#" title="点击查看和编辑文章">${a.title}</a></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">http://www.leadfar.org</div></td>
