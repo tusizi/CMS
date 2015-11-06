@@ -38,7 +38,7 @@ public class SearchArticlesServlet extends HttpServlet {
                 Article article = new Article();
                 article.setId(rs.getInt("id"));
                 article.setTitle(rs.getString("title"));
-                article.setContext(rs.getString("content"));
+                article.setContent(rs.getString("content"));
                 article.setSource(rs.getString("source"));
                 article.setCreatetime(rs.getTimestamp("createtime"));
                 article.setUpdatetime(rs.getTimestamp("updatetime"));

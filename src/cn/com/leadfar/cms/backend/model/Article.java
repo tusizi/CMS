@@ -12,14 +12,14 @@ public class Article {
     private Date deploytime;
     private Date updatetime;
     private  String title;
-    private  String context;
+    private  String content;
 
-    public String getContext() {
-        return context;
+    public String getContent() {
+        return content;
     }
 
-    public void setContext(String context) {
-        this.context = context;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Date getCreatetime() {

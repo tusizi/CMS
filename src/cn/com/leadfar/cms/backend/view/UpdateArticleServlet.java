@@ -19,6 +19,8 @@ import java.text.SimpleDateFormat;
         //更新文章功能
 public class UpdateArticleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //接收请求用UTF-8，避免乱码
+        request.setCharacterEncoding("UTF-8");
         //接受到更新的内容，包括（title content）
         String id = request.getParameter("id");
         String title = request.getParameter("title");

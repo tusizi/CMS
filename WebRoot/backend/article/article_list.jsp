@@ -172,7 +172,7 @@ td {
         <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE21">
         <a href="#" title="点击发布文章">发布</a> | 
         <a href="DelArticlesServlet?id=${a.id}" title="点击删除文章">删除</a> |
-        <a href="OpenArticleServlet?id=${a.id}" title="点击编辑文章">编辑</a>
+        <a href="OpenUpdateArticleServlet?id=${a.id}" title="点击编辑文章">编辑</a>
         </div></td>
       </tr>
        </c:forEach>

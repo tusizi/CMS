@@ -84,6 +84,22 @@
         <servlet-name>DelAticlesServlet</servlet-name>
         <url-pattern>/backend/DelArticlesServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>OpenUpdateArticleServlet</servlet-name>
+        <servlet-class>cn.com.leadfar.cms.backend.view.OpenUpdateArticleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OpenUpdateArticleServlet</servlet-name>
+        <url-pattern>/backend/OpenUpdateArticleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UpdateArticleServlet</servlet-name>
+        <servlet-class>cn.com.leadfar.cms.backend.view.UpdateArticleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateArticleServlet</servlet-name>
+        <url-pattern>/backend/UpdateArticleServlet</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

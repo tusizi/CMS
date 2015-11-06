@@ -31,13 +31,14 @@ public class OpenUpdateArticleServlet extends HttpServlet {
         ResultSet rs = null;//定义一个结果集
         try {
             pstmt = conn.prepareStatement(sql);//将SQL放入到预处理语句里
+            pstmt.setInt(1, Integer.parseInt(id));
             rs = pstmt.executeQuery();//预处理语句执行查询，将结果放入到结果集rs里
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-DD HH-MM-SS");
+            //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-DD HH-MM-SS");
            if (rs.next()){
                 Article article = new Article();
                 article.setId(rs.getInt("id"));
                 article.setTitle(rs.getString("title"));
-                article.setContext(rs.getString("content"));
+                article.setContent(rs.getString("content"));
                 article.setSource(rs.getString("source"));
                request.setAttribute("article", article);
             }
@@ -50,6 +51,6 @@ public class OpenUpdateArticleServlet extends HttpServlet {
         }
 
         //farword到更新界面
-        request.getRequestDispatcher("/backend/update_article.jsp").forward(request,response);
+        request.getRequestDispatcher("/backend/article/update_article.jsp").forward(request,response);
     }
 }
