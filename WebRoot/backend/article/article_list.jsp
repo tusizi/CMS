@@ -115,6 +115,9 @@ td {
       alert(url);
       window.location = url;
     }
+    function selectPagesize(field){
+      window.location = "SearchArticlesServlet?pagesize="+field.value;
+    }
   </script>
 </head>
 <body>
@@ -188,56 +191,24 @@ td {
     <td height="30">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="33%"><div align="left"><span class="STYLE22">&nbsp;&nbsp;&nbsp;&nbsp;共有<strong> 243</strong> 条记录，当前第<strong> 1</strong> 页，共 <strong>10</strong> 页</span></div></td>
+        <td width="33%"><div align="left"><span class="STYLE22">&nbsp;&nbsp;&nbsp;&nbsp;共有<strong> ${total}</strong> 条记录，当前第<strong>${currentPage}</strong> 页，共 <strong>${maxPage}</strong> 页</span></div></td>
         <td width="67%" align=right vAlign="center" noWrap>
-				<a href="#">首页</a>
-				<font color="red">1</font>
-				<a href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">下页</a>
-				<a href="#">尾页</a>
-				<select name="pagesize" onchange="selectPagesize(this)" >
-
-	<option value="5"
-	selected 
-	>5</option>
-
-	<option value="10"
-	 
-	>10</option>
-
-	<option value="15"
-	 
-	>15</option>
-
-	<option value="20"
-	 
-	>20</option>
-
-	<option value="25"
-	 
-	>25</option>
-
-	<option value="30"
-	 
-	>30</option>
-
-	<option value="35"
-	 
-	>35</option>
-
-	<option value="40"
-	 
-	>40</option>
-
-	<option value="45"
-	 
-	>45</option>
-
-	<option value="50"
-	 
-	>50</option>
-
+				<a href="SearchArticlesServlet?offset=0">首页</a>
+				<a href="SearchArticlesServlet?offset=${(currentPage-2 lt 0 ? 0:(currentPage-2))*pagesize}">前页</a>
+          <c:forEach begin = "1" end = "${maxPage}" step="1" var ="i">
+            <c:if test = "${currentPage eq i}">
+              <font color = "red">${i}</font>
+            </c:if>
+            <c:if test="${currentPage ne i}">
+              <a href = "SearchArticlesServlet?offset=${(i-1)*pagesize}">${i}</a>
+            </c:if>
+          </c:forEach>
+				<a href="SearchArticlesServlet?offset=${(currentPage ge maxPage ? (maxPage-1):currentPage)*pagesize}">下页</a>
+				<a href="SearchArticlesServlet?offset=${(maxPage-1)*pagesize}">尾页</a>
+<select name="pagesize" onchange="selectPagesize(this)" >
+                  <c:forEach begin="5" end="50" step="5" var="i">
+                    <option value="${i}"<c:if test="${i eq pagesize}">selected</c:if>${i}</option>
+                  </c:forEach>
 </select>
 
       </td>

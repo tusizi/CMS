@@ -29,3 +29,7 @@ url-pattern 的定义只有三种形式：
    逐条删除文章
 
    批量删除文章
+
+   完成频道管理功能，--id,name,description
+
+   完成分页处理的功能  limit
