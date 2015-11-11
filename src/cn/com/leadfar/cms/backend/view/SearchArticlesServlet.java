@@ -23,6 +23,11 @@ import java.util.logging.SimpleFormatter;
  */
 @WebServlet(name = "SearchArticlesServlet")
 public class SearchArticlesServlet extends HttpServlet {
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       doGet(req,resp);
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int offset = 0;
         int pagesize = 5;
@@ -45,10 +50,19 @@ public class SearchArticlesServlet extends HttpServlet {
         }else {
             pagesize=ps;
         }
+        //从界面中获取title参数
+         String title = request.getParameter("title");
         //查询文章列表
         List articles = new ArrayList();//定义一个文章列表
         String sql = "select * from t_article limit ?,?";//定义一个sql语句
+        if(title != null){
+            //模糊查询
+             sql ="select * from t_article where title like '%"+title+"%' limit ?,?";
+        }
         String sqlForTotal = "select count(*) from t_article";
+        if(title!= null){
+            sqlForTotal="select count(*) from t_article where title like '%"+title+"%'";
+        }
         Connection conn = DBUtil.getConn();//连接数据库
         PreparedStatement pstmt = null;//预处理语句
         PreparedStatement pstmtForTotal = null;
