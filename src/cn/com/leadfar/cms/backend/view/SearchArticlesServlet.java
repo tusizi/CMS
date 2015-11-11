@@ -31,9 +31,9 @@ public class SearchArticlesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int offset = 0;
         int pagesize = 5;
-        //希望从request中获取offset
+        //希望从request中获取pager.offset
         try {
-            offset = Integer.parseInt(request.getParameter("offset"));
+            offset = Integer.parseInt(request.getParameter("pager.offset"));
         }catch (Exception ignore){}
         //如果从request中传递过来pagesize,那么就需要更新http session中的pagesize
         if(request.getParameter("pagesize") != null){
