@@ -19,8 +19,7 @@ import java.sql.Timestamp;
 @WebServlet(name = "AddArticleServlet")
 public class AddArticleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //接受请求用utf-8
-        request.setCharacterEncoding("UTF-8");
+
         //从request中获取参数
         String title = request.getParameter("title");
         String content = request.getParameter("content");

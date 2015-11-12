@@ -48,6 +48,18 @@
     </servlet-mapping>
 
     <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>cn.com.leadfar.cms.backend.view.encodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/backend/*</url-pattern>
+    </filter-mapping>
+    <filter>
         <filter-name>LoginFilter</filter-name>
         <filter-class>cn.com.leadfar.cms.backend.view.LoginFilter</filter-class>
         <init-param>

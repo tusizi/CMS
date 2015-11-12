@@ -7,7 +7,7 @@
       window.location = document.getElementById("firstPage").href+"&pagesize="+field.value;
     }
   </script>
-<pg:pager url="SearchArticlesServlet" items="${total}" maxPageItems="${pagesize}" export="currentPageNumber=pageNumber" maxIndexPages="15" >
+<pg:pager url="${param.url}" items="${total}" maxPageItems="${pagesize}" export="currentPageNumber=pageNumber" maxIndexPages="15" >
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td width="33%"><div align="left"><span class="STYLE22">&nbsp;&nbsp;&nbsp;&nbsp;
@@ -16,7 +16,9 @@
            共 <strong>${pageNumber}</strong> 页
          </pg:last></span></div></td>
       <td width="67%" align=right vAlign="center" noWrap>
-        <pg:param name="title"/>
+        <c:forEach items="${param.params}" var="p">
+          <pg:param name="${p}"/>
+        </c:forEach>
         <pg:first >
           <a id="firstPage" href="${pageUrl}">首页</a>
         </pg:first>

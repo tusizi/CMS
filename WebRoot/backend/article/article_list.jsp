@@ -146,9 +146,14 @@ td {
       <form action="SearchArticlesServlet" method="post">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
+
           <td align="right">文章标题：</td>
           <td width="160px"><input type="text" name="title" value="${param.title}"></td>
+
+          <td align="right">文章内容：</td>
+          <td width="160px"><input type="text" name="content" value="${param.content}"></td>
           <td><input type="submit" name="submit" value="查询"> </td>
+
         </tr>
       </table>
       </form>
@@ -200,7 +205,10 @@ td {
   </tr>
   <tr>
     <td height="30">
-
+    <jsp:include page="/backend/common/pager.jsp">
+      <jsp:param name="url" value="SearchArticlesServlet"/>
+      <jsp:param name="params" value="title,content"/>
+      </jsp:include>
         </td>
   </tr>
 </table>
