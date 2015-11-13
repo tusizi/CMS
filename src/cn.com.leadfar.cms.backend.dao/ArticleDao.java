@@ -11,4 +11,5 @@ public interface ArticleDao {
     public void delArticles(String[] ids);
     public Article findArticleById(int id);
     public PageVO findArticles(String title,int offset,int pagesize);
+    public void updateArticle(Article a);
 }

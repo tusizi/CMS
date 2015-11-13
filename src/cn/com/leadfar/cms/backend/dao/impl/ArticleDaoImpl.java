@@ -147,4 +147,27 @@ public class ArticleDaoImpl implements ArticleDao {
         pv.setTotal(total);
         return pv;
     }
+
+    @Override
+    public void updateArticle(Article a) {
+        //用类似下面的sql语句，对数据库的内容更新
+        String sql = "update t_article set title=?, content=?, source = ?, updatetime = ? where id =?";//定义一个sql语句
+        Connection conn = DBUtil.getConn();//连接数据库
+        PreparedStatement pstmt = null;//预处理语句
+        try {
+            pstmt = conn.prepareStatement(sql);//将SQL放入到预处理语句里
+            pstmt.setString(1,a.getTitle());
+            pstmt.setString(2,a.getContent());
+            pstmt.setString(3,a.getSource());
+            pstmt.setTimestamp(4,new Timestamp(System.currentTimeMillis()));
+            pstmt.setInt(5, a.getId());
+            pstmt.executeUpdate();
+            conn.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(pstmt);
+            DBUtil.close(conn);
+        }
+    }
 }

@@ -2,6 +2,8 @@ package cn.com.leadfar.cms.backend.view;
 
 import cn.com.leadfar.cms.backend.dao.ArticleDao;
 import cn.com.leadfar.cms.backend.dao.impl.ArticleDaoImpl;
+import cn.com.leadfar.cms.utils.BeanFactory;
+import cn.com.leadfar.cms.utils.BeanFactoryImplForMysql;
 import cn.com.leadfar.cms.utils.DBUtil;
 
 import javax.servlet.ServletException;
@@ -30,7 +32,7 @@ public class DelArticlesServlet extends HttpServlet {
             request.setAttribute("error","无法删除文章，ID不允许为空");
             request.getRequestDispatcher("/backend/common/error.jsp").forward(request,response);
         }
-        ArticleDao articleDao= new ArticleDaoImpl();
+        ArticleDao articleDao=  new BeanFactoryImplForMysql().getArticleDao();
         articleDao.delArticles(ids);
         //转向列表页面
         request.getRequestDispatcher("/backend/SearchArticlesServlet").forward(request,response);

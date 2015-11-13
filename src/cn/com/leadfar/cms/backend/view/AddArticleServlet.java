@@ -3,6 +3,8 @@ package cn.com.leadfar.cms.backend.view;
 import cn.com.leadfar.cms.backend.dao.ArticleDao;
 import cn.com.leadfar.cms.backend.dao.impl.ArticleDaoImpl;
 import cn.com.leadfar.cms.backend.model.Article;
+import cn.com.leadfar.cms.utils.BeanFactory;
+import cn.com.leadfar.cms.utils.BeanFactoryImplForMysql;
 import cn.com.leadfar.cms.utils.DBUtil;
 
 import javax.servlet.ServletException;
@@ -27,7 +29,7 @@ public class AddArticleServlet extends HttpServlet {
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         String source = request.getParameter("source");
-        ArticleDao articleDao = new ArticleDaoImpl();
+        ArticleDao articleDao = new BeanFactoryImplForMysql().getArticleDao();
         Article a =new Article();
         a.setTitle(title);
         a.setContent(content);

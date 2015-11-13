@@ -3,6 +3,8 @@ package cn.com.leadfar.cms.backend.view;
 import cn.com.leadfar.cms.backend.dao.ArticleDao;
 import cn.com.leadfar.cms.backend.dao.impl.ArticleDaoImpl;
 import cn.com.leadfar.cms.backend.model.Article;
+import cn.com.leadfar.cms.utils.BeanFactory;
+import cn.com.leadfar.cms.utils.BeanFactoryImplForMysql;
 import cn.com.leadfar.cms.utils.DBUtil;
 
 import javax.servlet.ServletException;
@@ -26,7 +28,7 @@ public class OpenUpdateArticleServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //接受从界面传过来的id
             String id = request.getParameter("id");
-        ArticleDao articleDao = new ArticleDaoImpl();
+        ArticleDao articleDao=  new BeanFactoryImplForMysql().getArticleDao();
         Article article = articleDao.findArticleById(Integer.parseInt(id));
         request.setAttribute("article",article);
         //farword到更新界面

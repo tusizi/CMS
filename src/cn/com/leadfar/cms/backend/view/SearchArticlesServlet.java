@@ -4,6 +4,8 @@ import cn.com.leadfar.cms.backend.dao.ArticleDao;
 import cn.com.leadfar.cms.backend.dao.impl.ArticleDaoImpl;
 import cn.com.leadfar.cms.backend.model.Article;
 import cn.com.leadfar.cms.backend.vo.PageVO;
+import cn.com.leadfar.cms.utils.BeanFactory;
+import cn.com.leadfar.cms.utils.BeanFactoryImplForMysql;
 import cn.com.leadfar.cms.utils.DBUtil;
 
 import javax.servlet.ServletException;
@@ -56,7 +58,7 @@ public class SearchArticlesServlet extends HttpServlet {
         }
         //从界面中获取title参数
          String title = request.getParameter("title");
-        ArticleDao articleDao = new ArticleDaoImpl();
+        ArticleDao articleDao=  new BeanFactoryImplForMysql().getArticleDao();
         PageVO pv = articleDao.findArticles(title, offset, pagesize);
         request.setAttribute("pv", pv);
 //        //将共有多少页total传递
