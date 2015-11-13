@@ -1,5 +1,7 @@
 package cn.com.leadfar.cms.backend.view;
 
+import cn.com.leadfar.cms.backend.dao.ArticleDao;
+import cn.com.leadfar.cms.backend.dao.impl.ArticleDaoImpl;
 import cn.com.leadfar.cms.utils.DBUtil;
 
 import javax.servlet.ServletException;
@@ -28,26 +30,8 @@ public class DelArticlesServlet extends HttpServlet {
             request.setAttribute("error","无法删除文章，ID不允许为空");
             request.getRequestDispatcher("/backend/common/error.jsp").forward(request,response);
         }
-        //从数据库中删除文章
-        Connection conn = DBUtil.getConn();
-        String sql = "delete from t_article where id = ?";
-        PreparedStatement pstmt = null;
-        try {
-            for(int i =0; i<ids.length; i++){
-                pstmt = conn.prepareStatement(sql);
-                pstmt.setInt(1, Integer.parseInt(ids[i]));
-                pstmt.executeUpdate();
-            }
-            //什么意思？？？？？？
-            conn.commit();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            //为什么回滚，什么意思？？？？
-            DBUtil.rollback(conn);
-        }finally {
-            DBUtil.close(pstmt);
-            DBUtil.close(conn);
-        }
+        ArticleDao articleDao= new ArticleDaoImpl();
+        articleDao.delArticles(ids);
         //转向列表页面
         request.getRequestDispatcher("/backend/SearchArticlesServlet").forward(request,response);
     }

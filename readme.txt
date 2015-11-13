@@ -37,3 +37,5 @@ url-pattern 的定义只有三种形式：
    引入page-taglib分页
 
    将分页处理的JSP代码封装在一个通用的JSP中
+
+   将数据库操作的逻辑封装到dao（data access object）中

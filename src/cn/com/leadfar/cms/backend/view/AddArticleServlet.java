@@ -1,5 +1,8 @@
 package cn.com.leadfar.cms.backend.view;
 
+import cn.com.leadfar.cms.backend.dao.ArticleDao;
+import cn.com.leadfar.cms.backend.dao.impl.ArticleDaoImpl;
+import cn.com.leadfar.cms.backend.model.Article;
 import cn.com.leadfar.cms.utils.DBUtil;
 
 import javax.servlet.ServletException;
@@ -24,25 +27,12 @@ public class AddArticleServlet extends HttpServlet {
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         String source = request.getParameter("source");
-        //将数据插入数据库
-        Connection conn = DBUtil.getConn();
-        PreparedStatement pstmt =null;
-        String sql = "insert into t_article (title,content,source,createtime) values (?,?,?,?)";
-        try {
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,title);
-            pstmt.setString(2,content);
-            pstmt.setString(3,source);
-            pstmt.setTimestamp(4,new Timestamp(System.currentTimeMillis()));
-            pstmt.executeUpdate();
-            conn.commit();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            DBUtil.rollback(conn);
-        }finally {
-            DBUtil.close(pstmt);
-            DBUtil.close(conn);
-        }
+        ArticleDao articleDao = new ArticleDaoImpl();
+        Article a =new Article();
+        a.setTitle(title);
+        a.setContent(content);
+        a.setSource(source);
+        articleDao.addArticle(a);
             request.getRequestDispatcher("/backend/article/add_article_success.jsp").forward(request,response);
     }
 

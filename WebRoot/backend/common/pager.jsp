@@ -7,7 +7,7 @@
       window.location = document.getElementById("firstPage").href+"&pagesize="+field.value;
     }
   </script>
-<pg:pager url="${param.url}" items="${total}" maxPageItems="${pagesize}" export="currentPageNumber=pageNumber" maxIndexPages="15" >
+<pg:pager url="${param.url}" items="${pv.total}" maxPageItems="${pagesize}" export="currentPageNumber=pageNumber" maxIndexPages="15" >
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td width="33%"><div align="left"><span class="STYLE22">&nbsp;&nbsp;&nbsp;&nbsp;

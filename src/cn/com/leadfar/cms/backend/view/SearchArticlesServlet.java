@@ -1,6 +1,9 @@
 package cn.com.leadfar.cms.backend.view;
 
+import cn.com.leadfar.cms.backend.dao.ArticleDao;
+import cn.com.leadfar.cms.backend.dao.impl.ArticleDaoImpl;
 import cn.com.leadfar.cms.backend.model.Article;
+import cn.com.leadfar.cms.backend.vo.PageVO;
 import cn.com.leadfar.cms.utils.DBUtil;
 
 import javax.servlet.ServletException;
@@ -53,69 +56,19 @@ public class SearchArticlesServlet extends HttpServlet {
         }
         //从界面中获取title参数
          String title = request.getParameter("title");
-        //查询文章列表
-        List articles = new ArrayList();//定义一个文章列表
-        String sql = "select * from t_article limit ?,?";//定义一个sql语句
-        if(title != null){
-            //模糊查询
-             sql ="select * from t_article where title like '%"+title+"%' limit ?,?";
-        }
-        String sqlForTotal = "select count(*) from t_article";
-        if(title!= null){
-            sqlForTotal="select count(*) from t_article where title like '%"+title+"%'";
-        }
-        Connection conn = DBUtil.getConn();//连接数据库
-        PreparedStatement pstmt = null;//预处理语句
-        PreparedStatement pstmtForTotal = null;
-        ResultSet rsForTotal = null;
-        ResultSet rs = null;//定义一个结果集
-        int total = 0;
-        try {
-            //查询总记录数
-            pstmtForTotal = conn.prepareStatement(sqlForTotal);
-            rsForTotal = pstmtForTotal.executeQuery();
-            while (rsForTotal.next()){
-                total = rsForTotal.getInt(1);
-            }
-            //查询当前页的数据
-            pstmt = conn.prepareStatement(sql);//将SQL放入到预处理语句里
-            pstmt.setInt(1,offset);
-            pstmt.setInt(2,pagesize);
-            rs = pstmt.executeQuery();//预处理语句执行查询，将结果放入到结果集rs里
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-DD HH-MM-SS");
-            while(rs.next()){
-                Article article = new Article();
-                article.setId(rs.getInt("id"));
-                article.setTitle(rs.getString("title"));
-                article.setContent(rs.getString("content"));
-                article.setSource(rs.getString("source"));
-                article.setCreatetime(rs.getTimestamp("createtime"));
-                article.setUpdatetime(rs.getTimestamp("updatetime"));
-                article.setDeploytime(rs.getTimestamp("deploytime"));
-                articles.add(article);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            DBUtil.close(rsForTotal);
-            DBUtil.close(pstmtForTotal);
-            DBUtil.close(rs);
-            DBUtil.close(pstmt);
-            DBUtil.close(conn);
-        }
-        request.setAttribute("articles", articles);
-        //将共有多少页total传递
-        int maxPage = total / pagesize;
-        if (total % pagesize !=0){
-            maxPage = maxPage +1;
-        }
-        request.setAttribute("maxPage",maxPage);
-        //传递现在是多少页currentPage
-        int currentPage = offset / pagesize + 1;
-        request.setAttribute("currentPage",currentPage);
-        //传递共有几条记录
-        request.setAttribute("total",total);
-        System.out.println(articles);
+        ArticleDao articleDao = new ArticleDaoImpl();
+        PageVO pv = articleDao.findArticles(title, offset, pagesize);
+        request.setAttribute("pv", pv);
+//        //将共有多少页total传递
+//        int maxPage = total / pagesize;
+//        if (total % pagesize !=0){
+//            maxPage = maxPage +1;
+//        }
+//        request.setAttribute("maxPage",maxPage);
+//        //传递现在是多少页currentPage
+//        int currentPage = offset / pagesize + 1;
+//        request.setAttribute("currentPage",currentPage);
+//        //传递共有几条记录
         //forward到article_list.jsp
         request.getRequestDispatcher("/backend/article/article_list.jsp").forward(request, response);
     }

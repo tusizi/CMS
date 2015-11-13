@@ -175,8 +175,8 @@ td {
         <td width="70" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">发布时间</span></div></td>
         <td width="100" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">基本操作</span></div></td>
       </tr>
-     <c:if test="${not empty articles}">
-       <c:forEach items="${articles}" var="a">
+     <c:if test="${not empty pv.datas}">
+       <c:forEach items="${pv.datas}" var="a">
       <tr>
         <td height="20" bgcolor="#FFFFFF"><div align="center">
           <input type="checkbox" name="id" value="${a.id}" />
@@ -196,7 +196,7 @@ td {
       </tr>
        </c:forEach>
      </c:if>
-      <c:if test="${empty articles}">
+      <c:if test="${empty pv.datas}">
         <tr>
           <td width="100" height="20" colspan="9" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">没有文章可以显示</span></div></td>
         </tr>
