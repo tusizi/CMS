@@ -30,7 +30,7 @@ public class UpdateArticleServlet extends HttpServlet {
         article.setSource(source);
         article.setContent(content);
         article.setId(Integer.parseInt(id));
-        ArticleDao articleDao=  new PropertiesBeanFactory().getArticleDao();
+        ArticleDao articleDao= (ArticleDao)new PropertiesBeanFactory().getBean("articleDao");
         articleDao.updateArticle(article);
         //farword 到更新成功的界面
         request.getRequestDispatcher("/backend/article/update_article_success.jsp").forward(request,response);

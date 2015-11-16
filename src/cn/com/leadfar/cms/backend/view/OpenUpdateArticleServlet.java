@@ -21,7 +21,7 @@ public class OpenUpdateArticleServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //接受从界面传过来的id
             String id = request.getParameter("id");
-        ArticleDao articleDao=  new PropertiesBeanFactory().getArticleDao();
+        ArticleDao articleDao= (ArticleDao)new PropertiesBeanFactory().getBean("articleDao");
         Article article = articleDao.findArticleById(Integer.parseInt(id));
         request.setAttribute("article",article);
         //farword到更新界面

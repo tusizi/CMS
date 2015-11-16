@@ -47,7 +47,7 @@ public class SearchArticlesServlet extends HttpServlet {
         }
         //从界面中获取title参数
          String title = request.getParameter("title");
-        ArticleDao articleDao=  new PropertiesBeanFactory().getArticleDao();
+        ArticleDao articleDao=  (ArticleDao)new PropertiesBeanFactory().getBean("articleDao");
         PageVO pv = articleDao.findArticles(title, offset, pagesize);
         request.setAttribute("pv", pv);
 //        //将共有多少页total传递

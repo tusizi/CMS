@@ -27,7 +27,7 @@ public class DelArticlesServlet extends HttpServlet {
             request.setAttribute("error","无法删除文章，ID不允许为空");
             request.getRequestDispatcher("/backend/common/error.jsp").forward(request,response);
         }
-        ArticleDao articleDao=  new PropertiesBeanFactory().getArticleDao();
+        ArticleDao articleDao= (ArticleDao)new PropertiesBeanFactory().getBean("articleDao");
         articleDao.delArticles(ids);
         //转向列表页面
         request.getRequestDispatcher("/backend/SearchArticlesServlet").forward(request,response);

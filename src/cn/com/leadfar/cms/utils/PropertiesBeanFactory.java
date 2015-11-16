@@ -19,9 +19,49 @@ public class PropertiesBeanFactory implements BeanFactory {
             e.printStackTrace();
         }
     }
+//    @Override
+//    public ArticleDao getArticleDao() {
+//        String className = props.getProperty("articleDao");
+//
+//        Class clz = null;
+//        try {
+//            //创建一个className的类
+//            clz = Class.forName(className);
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            //将这个clz类实例化
+//            return (ArticleDao)clz.newInstance();
+//        } catch (InstantiationException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
+//
+//    @Override
+//    public ChannelDao getChannelDao() {
+//       String className = props.getProperty("channelDao");
+//        Class clz = null;
+//        try {
+//            clz = Class.forName(className);
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            return (ChannelDao)clz.newInstance();
+//        } catch (InstantiationException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
+
     @Override
-    public ArticleDao getArticleDao() {
-        String className = props.getProperty("articleDao");
+    public Object getBean(String name) {String className = props.getProperty("articleDao");
 
         Class clz = null;
         try {
@@ -33,25 +73,6 @@ public class PropertiesBeanFactory implements BeanFactory {
         try {
             //将这个clz类实例化
             return (ArticleDao)clz.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public ChannelDao getChannelDao() {
-       String className = props.getProperty("channelDao");
-        Class clz = null;
-        try {
-            clz = Class.forName(className);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            return (ChannelDao)clz.newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

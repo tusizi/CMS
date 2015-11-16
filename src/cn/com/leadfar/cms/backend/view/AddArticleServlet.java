@@ -23,7 +23,7 @@ public class AddArticleServlet extends HttpServlet {
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         String source = request.getParameter("source");
-        ArticleDao articleDao = new PropertiesBeanFactory().getArticleDao();
+        ArticleDao articleDao =(ArticleDao) new PropertiesBeanFactory().getBean("articleDao");
         Article a =new Article();
         a.setTitle(title);
         a.setContent(content);
