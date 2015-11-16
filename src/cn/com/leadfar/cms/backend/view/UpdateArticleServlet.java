@@ -2,9 +2,8 @@ package cn.com.leadfar.cms.backend.view;
 
 import cn.com.leadfar.cms.backend.dao.ArticleDao;
 import cn.com.leadfar.cms.backend.model.Article;
-import cn.com.leadfar.cms.utils.BeanFactory;
-import cn.com.leadfar.cms.utils.BeanFactoryImplForMysql;
-import cn.com.leadfar.cms.utils.DBUtil;
+
+import cn.com.leadfar.cms.utils.PropertiesBeanFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.*;
-import java.text.SimpleDateFormat;
 
 /**
  * Created by tusizi on 2015/11/5.
@@ -33,7 +30,7 @@ public class UpdateArticleServlet extends HttpServlet {
         article.setSource(source);
         article.setContent(content);
         article.setId(Integer.parseInt(id));
-        ArticleDao articleDao=  new BeanFactoryImplForMysql().getArticleDao();
+        ArticleDao articleDao=  new PropertiesBeanFactory().getArticleDao();
         articleDao.updateArticle(article);
         //farword 到更新成功的界面
         request.getRequestDispatcher("/backend/article/update_article_success.jsp").forward(request,response);

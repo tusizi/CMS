@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 /**
  * Created by tusizi on 2015/11/13.
  */
-public class ArticleDaoForOracleImpl implements ArticleDao {
+public class ArticleDaoForOracleImpl extends ArticleDaoImpl {
     public void addArticle(Article a){
         //将数据插入数据库
         Connection conn = DBUtil.getConn();
@@ -36,19 +36,6 @@ public class ArticleDaoForOracleImpl implements ArticleDao {
         }
     }
 
-    @Override
-    public void delArticles(String[] ids) {
 
-    }
-
-    @Override
-    public Article findArticleById(int id) {
-        return null;
-    }
-
-    @Override
-    public PageVO findArticles(String title, int offset, int pagesize) {
-        return null;
-    }
 }
 
