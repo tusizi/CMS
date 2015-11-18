@@ -2,8 +2,10 @@ package cn.com.leadfar.cms.backend.view;
 
 import cn.com.leadfar.cms.backend.dao.ArticleDao;
 
+import cn.com.leadfar.cms.utils.BeanFactory;
 import cn.com.leadfar.cms.utils.PropertiesBeanFactory;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +17,8 @@ import java.io.IOException;
  * Created by tusizi on 2015/11/4.
  */
 @WebServlet(name = "DelArticlesServlet")
-public class DelArticlesServlet extends HttpServlet {
+public class DelArticlesServlet extends BaseServlet {
+    private ArticleDao articleDao;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //从界面获取删除文章的id
@@ -27,9 +30,14 @@ public class DelArticlesServlet extends HttpServlet {
             request.setAttribute("error","无法删除文章，ID不允许为空");
             request.getRequestDispatcher("/backend/common/error.jsp").forward(request,response);
         }
-        ArticleDao articleDao= (ArticleDao)new PropertiesBeanFactory().getBean("articleDao");
+        BeanFactory factory = (BeanFactory) getServletContext().getAttribute(InitBeanFactoryServlet.INIT_FACTORY_NAME);
+        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
         articleDao.delArticles(ids);
         //转向列表页面
         request.getRequestDispatcher("/backend/SearchArticlesServlet").forward(request,response);
+    }
+
+    public void setArticleDao(ArticleDao articleDao) {
+        this.articleDao = articleDao;
     }
 }

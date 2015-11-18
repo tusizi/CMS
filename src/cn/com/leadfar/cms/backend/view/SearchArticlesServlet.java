@@ -3,6 +3,7 @@ package cn.com.leadfar.cms.backend.view;
 import cn.com.leadfar.cms.backend.dao.ArticleDao;
 import cn.com.leadfar.cms.backend.vo.PageVO;
 
+import cn.com.leadfar.cms.utils.BeanFactory;
 import cn.com.leadfar.cms.utils.PropertiesBeanFactory;
 
 import javax.servlet.ServletException;
@@ -16,7 +17,8 @@ import java.io.IOException;
  * Created by tusizi on 2015/10/22.
  */
 @WebServlet(name = "SearchArticlesServlet")
-public class SearchArticlesServlet extends HttpServlet {
+public class SearchArticlesServlet extends BaseServlet {
+    private ArticleDao articleDao;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        doGet(req,resp);
@@ -47,7 +49,8 @@ public class SearchArticlesServlet extends HttpServlet {
         }
         //从界面中获取title参数
          String title = request.getParameter("title");
-        ArticleDao articleDao=  (ArticleDao)new PropertiesBeanFactory().getBean("articleDao");
+        BeanFactory factory = (BeanFactory) getServletContext().getAttribute(InitBeanFactoryServlet.INIT_FACTORY_NAME);
+        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
         PageVO pv = articleDao.findArticles(title, offset, pagesize);
         request.setAttribute("pv", pv);
 //        //将共有多少页total传递
@@ -62,5 +65,9 @@ public class SearchArticlesServlet extends HttpServlet {
 //        //传递共有几条记录
         //forward到article_list.jsp
         request.getRequestDispatcher("/backend/article/article_list.jsp").forward(request, response);
+    }
+
+    public void setArticleDao(ArticleDao articleDao) {
+        this.articleDao = articleDao;
     }
 }

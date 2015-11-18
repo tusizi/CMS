@@ -38,7 +38,7 @@ url-pattern 的定义只有三种形式：
 
    将分页处理的JSP代码封装在一个通用的JSP中
 
-   将数据库操作的逻辑封装到dao（data access object）中
+   将数据库操作的逻辑封装到dao（data access object）中duix
 
    利用简单工厂模式，将创建DAO的职责转移到简单工厂  ----但是这种设计方式违反了OCP设计原则
 
@@ -50,3 +50,12 @@ url-pattern 的定义只有三种形式：
    --假如要创建多个DAO，那么就定义一个抽象工厂，在抽象工厂中定义有哪些dao需要创建
 
    利用配置文件来避免客户端依赖于众多的具体的工厂实现
+
+   将抽象工厂中的方法定义为更加通用的getBean方法，以及实现预先初始化DAO对象
+   DAO对象不包含状态，只是纯粹的操作，就是多个线程同时访问一个DAO对象，也完全没有问题，
+   所以没必要每次访问DAO都要创建一个DAO对象
+   因此，在PropertiesBeanFactory中初始化所有的bean,每次getBean，只是直接返回一个已经初始化好的对象即可。
+
+   在一个InitBeanFactroyServlet中初始化工厂对象，这个servlet不处理任何从页面传递过去的请求，他仅仅负责初始化
+
+   利用DI（Dependency Injection）-依赖注入

@@ -3,6 +3,7 @@ package cn.com.leadfar.cms.backend.view;
 import cn.com.leadfar.cms.backend.dao.ArticleDao;
 import cn.com.leadfar.cms.backend.model.Article;
 
+import cn.com.leadfar.cms.utils.BeanFactory;
 import cn.com.leadfar.cms.utils.PropertiesBeanFactory;
 
 import javax.servlet.ServletException;
@@ -17,7 +18,8 @@ import java.io.IOException;
  */
 @WebServlet(name = "UpdateArticlesServlet")
         //更新文章功能
-public class UpdateArticleServlet extends HttpServlet {
+public class UpdateArticleServlet extends BaseServlet {
+    private ArticleDao articleDao;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //接受到更新的内容，包括（title content）
@@ -30,10 +32,14 @@ public class UpdateArticleServlet extends HttpServlet {
         article.setSource(source);
         article.setContent(content);
         article.setId(Integer.parseInt(id));
-        ArticleDao articleDao= (ArticleDao)new PropertiesBeanFactory().getBean("articleDao");
+        BeanFactory factory = (BeanFactory) getServletContext().getAttribute(InitBeanFactoryServlet.INIT_FACTORY_NAME);
+        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
         articleDao.updateArticle(article);
         //farword 到更新成功的界面
         request.getRequestDispatcher("/backend/article/update_article_success.jsp").forward(request,response);
     }
 
+    public void setArticleDao(ArticleDao articleDao) {
+        this.articleDao = articleDao;
+    }
 }

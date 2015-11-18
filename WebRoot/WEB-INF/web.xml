@@ -112,6 +112,16 @@
         <servlet-name>UpdateArticleServlet</servlet-name>
         <url-pattern>/backend/UpdateArticleServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>InitBeanFactoryServlet</servlet-name>
+        <servlet-class>cn.com.leadfar.cms.backend.view.InitBeanFactoryServlet</servlet-class>
+        <init-param>
+            <param-name>configLocation</param-name>
+            <param-value>beans.properties</param-value>
+        </init-param>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

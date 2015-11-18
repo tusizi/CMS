@@ -1,4 +1,5 @@
 package cn.com.leadfar.cms.utils;
+import javax.security.auth.login.Configuration;
 import java.io.IOException;
 import java.util.*;
 
@@ -7,13 +8,17 @@ import java.util.*;
  */
 public class PropertiesBeanFactory implements BeanFactory {
     Map beans = new HashMap();
+    //为什么没有以下方法体
     public PropertiesBeanFactory(){
+        this("beans.properties");
+    }
+    public PropertiesBeanFactory(String  configurationFile){
         try {
             Properties props = new Properties();
             //读取配置文件，得到具体DAO的实现类名
-            props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("beans.properties"));
+            props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream(configurationFile));
             //根据配置文件，初始化所有的DAO对象
-             Set set = props.entrySet();
+             Set set = props.entrySet();//properties其实就是一个map，map里有entrySet这个方法，就是一个名值对（key,value）
            for (Iterator iterator=set.iterator();iterator.hasNext();){
                Map.Entry entry= (Map.Entry) iterator.next();
                String key = (String)entry.getKey();//DAO的名称
@@ -27,6 +32,7 @@ public class PropertiesBeanFactory implements BeanFactory {
             e.printStackTrace();
         }
     }
+
 //    @Override
 //    public ArticleDao getArticleDao() {
 //        String className = props.getProperty("articleDao");
