@@ -34,11 +34,12 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         //系统判断用户名是否存在，密码是否正确
-        String sql = "select * from t_cms where username = ?";
+        String sql = "select * from t_user where username = ?";
         Connection conn = DBUtil.getConn();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         try {
+
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
             rs = pstmt.executeQuery();
