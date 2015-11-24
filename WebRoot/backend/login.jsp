@@ -21,7 +21,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     function reloadcheckcode(img){
       img.src = "images/checkcode.jpg?"+Math.random();
     }
+    //让页面平铺在整个窗口
+    if(window.parent != window){
+      window.parent.location = window.location;
+    }
   </script>
+
 </head>
 <body>
 <div id="top"> </div>

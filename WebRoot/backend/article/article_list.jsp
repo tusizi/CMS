@@ -1,7 +1,8 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="/backend/common/taglib.jsp"%>
+<%@ include file="/backend/common/taglib.jsp"%>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/backend/";
@@ -76,6 +77,46 @@ td {
 }
 -->
 </style>
+  <script type="text/javascript">
+    function selectAll(field){
+      //判断顶上的checkedbox的选中状态
+      //alert(filed.checked);
+      //根据checkbox的名称，获取所有被选中的checkbox框对象
+      var  idCheckboxs = document.getElementsByName("id");
+      for(var i = 0; i<idCheckboxs.length; i++){
+        //判断顶上的checkedbox的选中状态
+        if(field.checked){
+          idCheckboxs[i].checked = true;
+        }else{
+          idCheckboxs[i].checked = false;
+        }
+      }
+    }
+
+    function del(){
+      //判断有哪些checkedboxs框被选中
+      var idCheckboxs = document.getElementsByName("id");
+      var url ="DelArticleServlet";
+      var checkedIds =[];
+      for(var i=0;i<idCheckboxs.length;i++){
+        if(idCheckboxs[i].checked){
+          //把选中的checkboxs框的value也就是它们的id值放入checkIds数组
+            checkedIds[checkedIds.length] = idCheckboxs[i].value;
+        }
+      }
+      for(var i=0;i<checkedIds.length;i++){
+        if(i==0){
+          url = url+"?id="+checkedIds[i];
+        }else{
+          url = url+"&id="+checkedIds[i];
+        }
+      }
+      //通过GET方式向后台递交一个请求
+      alert(url);
+      window.location = url;
+    }
+
+  </script>
 </head>
 <body>
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -91,9 +132,9 @@ td {
               </tr>
             </table></td>
             <td><div align="right"><span class="STYLE1">
-             &nbsp;&nbsp;<img src="images/add.gif" width="10" height="10" /> <a href="#">添加</a>   
+             &nbsp;&nbsp;<img src="images/add.gif" width="10" height="10" /> <a href="article/add_article.jsp">添加</a>
              &nbsp;&nbsp;<img src="images/edit.gif" width="10" height="10" /> <a href="#">发布</a>
-             &nbsp; <img src="images/del.gif" width="10" height="10" /> <a href="#">删除</a>    &nbsp;&nbsp;   &nbsp;
+             &nbsp; <img src="images/del.gif" width="10" height="10" /> <a href="javascript:del()">删除</a>    &nbsp;&nbsp;   &nbsp;
              </span><span class="STYLE1"> &nbsp;</span></div></td>
           </tr>
         </table></td>
@@ -102,10 +143,28 @@ td {
   </tr>
   <tr>
     <td>
+      <form action="SearchArticlesServlet" method="post">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+
+          <td align="right">文章标题：</td>
+          <td width="160px"><input type="text" name="title" value="${param.title}"></td>
+
+          <td align="right">文章内容：</td>
+          <td width="160px"><input type="text" name="content" value="${param.content}"></td>
+          <td><input type="submit" name="submit" value="查询"> </td>
+
+        </tr>
+      </table>
+      </form>
+    </td>
+  </tr>
+  <tr>
+    <td>
     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce">
       <tr>
         <td width="4%" height="20" bgcolor="d3eaef" class="STYLE10"><div align="center">
-          <input type="checkbox" name="checkbox" id="checkbox" />
+          <input type="checkbox" name="checkbox" onclick = "selectAll(this)" />
         </div></td>
         <td width="100" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">文章标题</span></div></td>
         <td width="50" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">文章来源</span></div></td>
@@ -116,11 +175,11 @@ td {
         <td width="70" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">发布时间</span></div></td>
         <td width="100" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">基本操作</span></div></td>
       </tr>
-     <c:if test="${not empty articles}">
-       <c:forEach items="${articles}" var="a">
+     <c:if test="${not empty pv.datas}">
+       <c:forEach items="${pv.datas}" var="a">
       <tr>
         <td height="20" bgcolor="#FFFFFF"><div align="center">
-          <input type="checkbox" name="checkbox2" id="checkbox2" />
+          <input type="checkbox" name="id" value="${a.id}" />
         </div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><a href="#" title="点击查看和编辑文章">${a.title}</a></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">http://www.leadfar.org</div></td>
@@ -131,13 +190,13 @@ td {
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">2010-07-19</div></td>
         <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE21">
         <a href="#" title="点击发布文章">发布</a> | 
-        <a href="#" title="点击删除文章">删除</a> |
-        <a href="#" title="点击编辑文章">编辑</a>
+        <a href="DelArticlesServlet?id=${a.id}" title="点击删除文章">删除</a> |
+        <a href="OpenUpdateArticleServlet?id=${a.id}" title="点击编辑文章">编辑</a>
         </div></td>
       </tr>
        </c:forEach>
      </c:if>
-      <c:if test="${empty articles}">
+      <c:if test="${empty pv.datas}">
         <tr>
           <td width="100" height="20" colspan="9" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">没有文章可以显示</span></div></td>
         </tr>
@@ -146,63 +205,11 @@ td {
   </tr>
   <tr>
     <td height="30">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="33%"><div align="left"><span class="STYLE22">&nbsp;&nbsp;&nbsp;&nbsp;共有<strong> 243</strong> 条记录，当前第<strong> 1</strong> 页，共 <strong>10</strong> 页</span></div></td>
-        <td width="67%" align=right vAlign="center" noWrap>
-				<a href="#">首页</a>
-				<font color="red">1</font>
-				<a href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">下页</a>
-				<a href="#">尾页</a>
-				<select name="pagesize" onchange="selectPagesize(this)" >
-
-	<option value="5"
-	selected 
-	>5</option>
-
-	<option value="10"
-	 
-	>10</option>
-
-	<option value="15"
-	 
-	>15</option>
-
-	<option value="20"
-	 
-	>20</option>
-
-	<option value="25"
-	 
-	>25</option>
-
-	<option value="30"
-	 
-	>30</option>
-
-	<option value="35"
-	 
-	>35</option>
-
-	<option value="40"
-	 
-	>40</option>
-
-	<option value="45"
-	 
-	>45</option>
-
-	<option value="50"
-	 
-	>50</option>
-
-</select>
-
-      </td>
-      </tr>
-    </table></td>
+    <jsp:include page="/backend/common/pager.jsp">
+      <jsp:param name="url" value="SearchArticlesServlet"/>
+      <jsp:param name="params" value="title,content"/>
+      </jsp:include>
+        </td>
   </tr>
 </table>
 </body>
