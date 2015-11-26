@@ -1,4 +1,4 @@
-CREATE TABLE  t_article{
+CREATE TABLE  t_article(
 id INTEGER NOT NULL auto_increment,
 title VARCHAR(200),
 content longtext,
@@ -7,4 +7,4 @@ createtime datetime,
 updatetime datetime,
 deploytime datetime,
 PRIMARY KEY(id)
-};
+);

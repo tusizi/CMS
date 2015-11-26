@@ -17,7 +17,8 @@ public class DBUtil {
         //2.创建数据库连接
         //url:数据库连接协议
 
-        String url = "jdbc:mysql://localhost/cms";
+//        String url = "jdbc:mysql://localhost/cms";
+        String url = "jdbc:mysql://10.211.55.21:3306/cms";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, "root", "root");
