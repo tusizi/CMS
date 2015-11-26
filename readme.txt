@@ -59,3 +59,5 @@ url-pattern 的定义只有三种形式：
    在一个InitBeanFactroyServlet中初始化工厂对象，这个servlet不处理任何从页面传递过去的请求，他仅仅负责初始化
 
    利用DI（Dependency Injection）-依赖注入
+
+   数据库初始化脚本及其运行

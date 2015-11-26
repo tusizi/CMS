@@ -143,7 +143,7 @@ td {
   </tr>
   <tr>
     <td>
-      <form action="SearchArticlesServlet" method="post">
+      <form action="ArticleServlet" method="post">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
 
@@ -190,8 +190,10 @@ td {
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">2010-07-19</div></td>
         <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE21">
         <a href="#" title="点击发布文章">发布</a> | 
-        <a href="DelArticlesServlet?id=${a.id}" title="点击删除文章">删除</a> |
-        <a href="OpenUpdateArticleServlet?id=${a.id}" title="点击编辑文章">编辑</a>
+        <a href="ArticleServlet?id=${a.id}" title="点击删除文章">删除</a>
+          <input type="hidden" name="method" value="del">|
+        <a href="ArticleServlet?id=${a.id}" title="点击编辑文章">编辑</a>
+          <input type="hidden" name="method" value="openUpdate">
         </div></td>
       </tr>
        </c:forEach>

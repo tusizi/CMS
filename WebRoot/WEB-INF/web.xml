@@ -73,44 +73,12 @@
     </filter-mapping>
     
     <servlet>
-        <servlet-name>SearchArticlesServlet</servlet-name>
-        <servlet-class>cn.com.leadfar.cms.backend.view.SearchArticlesServlet</servlet-class>
+        <servlet-name>ArticleServlet</servlet-name>
+        <servlet-class>cn.com.leadfar.cms.backend.view.ArticleServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>SearchArticlesServlet</servlet-name>
-        <url-pattern>/backend/SearchArticlesServlet</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>AddArticleServlet</servlet-name>
-        <servlet-class>cn.com.leadfar.cms.backend.view.AddArticleServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AddArticleServlet</servlet-name>
-        <url-pattern>/backend/AddArticleServlet</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>DelAticlesServlet</servlet-name>
-        <servlet-class>cn.com.leadfar.cms.backend.view.DelArticlesServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DelAticlesServlet</servlet-name>
-        <url-pattern>/backend/DelArticlesServlet</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>OpenUpdateArticleServlet</servlet-name>
-        <servlet-class>cn.com.leadfar.cms.backend.view.OpenUpdateArticleServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>OpenUpdateArticleServlet</servlet-name>
-        <url-pattern>/backend/OpenUpdateArticleServlet</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>UpdateArticleServlet</servlet-name>
-        <servlet-class>cn.com.leadfar.cms.backend.view.UpdateArticleServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UpdateArticleServlet</servlet-name>
-        <url-pattern>/backend/UpdateArticleServlet</url-pattern>
+        <servlet-name>ArticleServlet</servlet-name>
+        <url-pattern>/backend/ArticleServlet</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>InitBeanFactoryServlet</servlet-name>

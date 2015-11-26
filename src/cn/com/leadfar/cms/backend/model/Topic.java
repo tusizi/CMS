@@ -1,20 +1,11 @@
 package cn.com.leadfar.cms.backend.model;
 
 /**
- * Created by tusizi on 2015/11/16.
+ * Created by tusizi on 2015/11/26.
  */
-public class Channel {
+public class Topic {
     private int id;
     private String name;
-    private String description;
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public int getId() {
         return id;

@@ -100,7 +100,8 @@ fieldset div {
 <body>
 <div id="formwrapper">
 	<h3>更新网站文章</h3>
-	<form action="UpdateArticleServlet" method="post">
+	<form action="ArticleServlet" method="post">
+		<input type="hidden" name="method" value="openUpdate">
 		<%--隐藏域，不需要给用户看见--%>
 		<input type="hidden" name ="id" value="${article.id}">
 	<fieldset>

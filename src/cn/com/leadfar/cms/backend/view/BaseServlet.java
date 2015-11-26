@@ -67,6 +67,7 @@ public class BaseServlet extends HttpServlet {
             //根据method的取值调用相关的方法
             try {
                 Method m = this.getClass().getMethod(method,HttpServletRequest.class,HttpServletResponse.class);
+               //将请求相应的转发
                 m.invoke(this,request,response);
             } catch (Exception e) {
                 e.printStackTrace();
