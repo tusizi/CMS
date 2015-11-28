@@ -34,7 +34,6 @@ public class LoginServlet extends BaseServlet {
 
         Admin admin = adminDao.findAdminByUsername(username);
 
-
         //系统判断用户名是否存在
         if (admin != null) {
             String pass = admin.getPassword();
@@ -61,5 +60,5 @@ public class LoginServlet extends BaseServlet {
         this.adminDao = adminDao;
     }
 
-    ;
+
 }
