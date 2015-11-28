@@ -42,8 +42,6 @@ public class ArticleServlet extends BaseServlet {
         }
         //从界面中获取title参数
         String title = request.getParameter("title");
-        BeanFactory factory = (BeanFactory) getServletContext().getAttribute(InitBeanFactoryServlet.INIT_FACTORY_NAME);
-        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
         PageVO pv = articleDao.findArticles(title, offset, pagesize);
         request.setAttribute("pv", pv);
 //        //将共有多少页total传递
@@ -67,8 +65,6 @@ public class ArticleServlet extends BaseServlet {
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         String source = request.getParameter("source");
-//        BeanFactory factory = (BeanFactory) getServletContext().getAttribute(InitBeanFactoryServlet.INIT_FACTORY_NAME);
-//        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
         Article a =new Article();
         a.setTitle(title);
         a.setContent(content);
@@ -87,8 +83,6 @@ public class ArticleServlet extends BaseServlet {
             request.setAttribute("error","无法删除文章，ID不允许为空");
             request.getRequestDispatcher("/backend/common/error.jsp").forward(request,response);
         }
-        BeanFactory factory = (BeanFactory) getServletContext().getAttribute(InitBeanFactoryServlet.INIT_FACTORY_NAME);
-        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
         articleDao.delArticles(ids);
         //转向列表页面
         //request.getRequestDispatcher("/backend/SearchArticlesServlet").forward(request,response);
@@ -98,8 +92,7 @@ public class ArticleServlet extends BaseServlet {
     public void openUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //接受从界面传过来的id
         String id = request.getParameter("id");
-        BeanFactory factory = (BeanFactory) getServletContext().getAttribute(InitBeanFactoryServlet.INIT_FACTORY_NAME);
-        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
+
         Article article = articleDao.findArticleById(Integer.parseInt(id));
         request.setAttribute("article",article);
         //farword到更新界面
@@ -119,8 +112,7 @@ public class ArticleServlet extends BaseServlet {
         article.setSource(source);
         article.setContent(content);
         article.setId(Integer.parseInt(id));
-        BeanFactory factory = (BeanFactory) getServletContext().getAttribute(InitBeanFactoryServlet.INIT_FACTORY_NAME);
-        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
+
         articleDao.updateArticle(article);
         //farword 到更新成功的界面
         request.getRequestDispatcher("/backend/article/update_article_success.jsp").forward(request,response);
