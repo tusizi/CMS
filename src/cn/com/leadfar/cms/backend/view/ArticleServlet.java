@@ -65,6 +65,15 @@ public class ArticleServlet extends BaseServlet {
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         String source = request.getParameter("source");
+        String author = request.getParameter("author");
+        String keyword = request.getParameter("keyword");
+        String intro = request.getParameter("intro");
+        String type = request.getParameter("type");
+        //String recommend =request.getParameter("recommend");
+        //String recommend =request.getParameter("headline");
+        //String channels = request.getParameter("channels");
+       // String topicId = request.getParameter("topicId");
+        //String adminId = request.getParameter("adminId");
         Article a =new Article();
         a.setTitle(title);
         a.setContent(content);
@@ -72,6 +81,7 @@ public class ArticleServlet extends BaseServlet {
         articleDao.addArticle(a);
         request.getRequestDispatcher("/backend/article/add_article_success.jsp").forward(request,response);
     }
+
     //删除文章
     public void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //从界面获取删除文章的id
@@ -88,6 +98,7 @@ public class ArticleServlet extends BaseServlet {
         //request.getRequestDispatcher("/backend/SearchArticlesServlet").forward(request,response);
         response.sendRedirect(request.getContextPath()+"/backend/ArticleServlet");
     }
+
     //打开更新界面
     public void openUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //接受从界面传过来的id
@@ -97,8 +108,8 @@ public class ArticleServlet extends BaseServlet {
         request.setAttribute("article",article);
         //farword到更新界面
         request.getRequestDispatcher("/backend/article/update_article.jsp").forward(request,response);
-
     }
+
     //更新文章
     public void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

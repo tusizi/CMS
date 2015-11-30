@@ -10,6 +10,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by tusizi on 2015/11/13.
@@ -19,19 +20,45 @@ public class ArticleDaoImpl implements ArticleDao {
         //将数据插入数据库
         Connection conn = DBUtil.getConn();
         PreparedStatement pstmt =null;
-        String sql = "insert into t_article (title,content,source,createtime) values (?,?,?,?)";
+        PreparedStatement pstmtForChannel = null;
+        String sql = "insert into t_article (" +
+                "title,content,source,author,keyword,intro,type,recommend,headline,topicId,adminId,createtime,updatetime) " +
+                "values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sqlForChannel="insert into t_channel_article(channelId,articleId) values(?,?)";
         try {
-            pstmt = conn.prepareStatement(sql);
+            pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);//为了得到插入时的id
             pstmt.setString(1,a.getTitle());
             pstmt.setString(2,a.getContent());
             pstmt.setString(3,a.getSource());
-            pstmt.setTimestamp(4,new Timestamp(System.currentTimeMillis()));
+            pstmt.setString(4,a.getAuthor());
+            pstmt.setString(5,a.getKeyword());
+            pstmt.setString(6,a.getIntro());
+            pstmt.setString(7,a.getType());
+            pstmt.setBoolean(8, a.isRecommend());
+            pstmt.setBoolean(9, a.isHeadline());
+            pstmt.setInt(10, a.getTopicId());
+            pstmt.setInt(11, a.getAdminId());
+            pstmt.setTimestamp(12, new Timestamp(System.currentTimeMillis()));
+            pstmt.setTimestamp(13, new Timestamp(System.currentTimeMillis()));
             pstmt.executeUpdate();
+            //获得刚刚插入记录的id
+            ResultSet newId=pstmt.getGeneratedKeys();
+            if (newId.next()){
+                a.setId(newId.getInt(1));
+            }
+            //插入文章与频道之间的关联关系
+            Set<Channel> channels=a.getChannels();
+            for (Channel c:channels){
+                pstmtForChannel = conn.prepareStatement(sqlForChannel);
+                pstmtForChannel.setInt(1,c.getId());
+                pstmtForChannel.setInt(2,a.getId());
+            }
             conn.commit();
         } catch (SQLException e) {
             e.printStackTrace();
             DBUtil.rollback(conn);
         }finally {
+            DBUtil.close(pstmtForChannel);
             DBUtil.close(pstmt);
             DBUtil.close(conn);
         }
