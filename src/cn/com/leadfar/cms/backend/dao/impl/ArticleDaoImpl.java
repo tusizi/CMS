@@ -2,6 +2,7 @@ package cn.com.leadfar.cms.backend.dao.impl;
 
 import cn.com.leadfar.cms.backend.dao.ArticleDao;
 import cn.com.leadfar.cms.backend.model.Article;
+import cn.com.leadfar.cms.backend.model.Channel;
 import cn.com.leadfar.cms.backend.vo.PageVO;
 import cn.com.leadfar.cms.utils.DBUtil;
 
@@ -146,6 +147,11 @@ public class ArticleDaoImpl implements ArticleDao {
         pv.setDatas(articles);
         pv.setTotal(total);
         return pv;
+    }
+
+    @Override
+    public PageVO findArticles(Channel channel, int offset, int pagesize) {
+        return null;
     }
 
     @Override

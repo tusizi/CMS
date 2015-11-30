@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="js/js.js"></script>
   <script type="text/javascript">
     function reloadcheckcode(img){
-      img.src = "images/checkcode.jpg?"+Math.random();
+      img.src = "LoginServlet?method=checkcode&"+Math.random();
     }
     //让页面平铺在整个窗口
     if(window.parent != window){
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <label>验证码：
         <input name="checkcode" type="text" id="chknumber" maxlength="4" class="chknumber_input" />
         </label>
-        <img src="images/checkcode.jpg" id="safecode" onclick="reloadcheckcode(this)" title="如果看不清，请点击刷新" />
+        <img src="LoginServlet?method=checkcode" id="safecode" onclick="reloadcheckcode(this)" title="如果看不清，请点击刷新" />
       </div>
     </div>
     <div id="center_middle_right"></div>

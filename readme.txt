@@ -61,3 +61,4 @@ url-pattern 的定义只有三种形式：
    利用DI（Dependency Injection）-依赖注入
 
    数据库初始化脚本及其运行
+   先修改init.bat文件中的用户名和密码，再从命令行进入本目录（bin目录），执行init.bat脚本即可

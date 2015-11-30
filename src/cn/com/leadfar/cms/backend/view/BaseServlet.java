@@ -19,7 +19,7 @@ public class BaseServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BeanFactory factory = (BeanFactory) getServletContext().getAttribute(InitBeanFactoryServlet.INIT_FACTORY_NAME);
-        System.out.println("调用了BaseServlet中的servlet方法");
+        System.out.println("调用了BaseServlet中的service方法");
         //this是多态的，this是具体的子类对象
         //利用反射机制调用this对象中的相关的setters方法
         Method[] method = this.getClass().getMethods();
