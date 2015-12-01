@@ -39,7 +39,8 @@ public class ArticleDaoImpl implements ArticleDao {
             pstmt.setInt(10, a.getTopicId());
             pstmt.setInt(11, a.getAdminId());
             pstmt.setTimestamp(12, new Timestamp(System.currentTimeMillis()));
-            pstmt.setTimestamp(13, new Timestamp(System.currentTimeMillis()));
+            pstmt.setTimestamp(13, new Timestamp(System.currentTimeMillis()));//
+            //更新
             pstmt.executeUpdate();
             //获得刚刚插入记录的id
             ResultSet newId=pstmt.getGeneratedKeys();
@@ -48,10 +49,13 @@ public class ArticleDaoImpl implements ArticleDao {
             }
             //插入文章与频道之间的关联关系
             Set<Channel> channels=a.getChannels();
-            for (Channel c:channels){
-                pstmtForChannel = conn.prepareStatement(sqlForChannel);
-                pstmtForChannel.setInt(1,c.getId());
-                pstmtForChannel.setInt(2,a.getId());
+            if (channels !=null){
+                for (Channel c:channels){
+                    pstmtForChannel = conn.prepareStatement(sqlForChannel);
+                    pstmtForChannel.setInt(1,c.getId());
+                    pstmtForChannel.setInt(2,a.getId());
+                    pstmtForChannel.executeUpdate();
+                }
             }
             conn.commit();
         } catch (SQLException e) {

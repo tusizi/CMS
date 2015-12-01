@@ -1,7 +1,4 @@
 package cn.com.leadfar.cms.utils;
-
-import org.h2.jdbcx.JdbcConnectionPool;
-
 import java.sql.*;
 
 /**
@@ -53,7 +50,9 @@ public class DBUtil {
 
     public static void close(PreparedStatement pstmt) {
         try {
-            pstmt.close();
+            if (pstmt != null){
+                pstmt.close();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

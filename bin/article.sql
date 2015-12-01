@@ -1,5 +1,5 @@
 drop table if exists t_article;
-create table t_aricle(
+create table t_article(
   id integer not null auto_increment,
   title varchar(200),
   source varchar(255),

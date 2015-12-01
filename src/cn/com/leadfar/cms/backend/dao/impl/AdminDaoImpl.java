@@ -14,6 +14,11 @@ import java.sql.SQLException;
  */
 public class AdminDaoImpl implements AdminDao {
     @Override
+    public void addAdmin(Admin admin) {
+
+    }
+
+    @Override
     public Admin findAdminByUsername(String username) {
 
         String sql = "select * from t_admin where username = ?";
