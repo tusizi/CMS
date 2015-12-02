@@ -68,3 +68,5 @@ url-pattern 的定义只有三种形式：
     iBATIS - 针对JDBC进行封装
     apache-commons-beanutils - 针对request参数进行封装
     分页查询的封装 - 利用TheadLocal设计模式
+
+    将SqlSessjion类封装

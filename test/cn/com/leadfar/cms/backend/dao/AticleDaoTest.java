@@ -2,13 +2,12 @@ package cn.com.leadfar.cms.backend.dao;
 
 import cn.com.leadfar.cms.backend.model.Article;
 import cn.com.leadfar.cms.backend.model.Channel;
+import cn.com.leadfar.cms.backend.vo.PageVO;
 import cn.com.leadfar.cms.utils.BeanFactory;
 import cn.com.leadfar.cms.utils.PropertiesBeanFactory;
 import junit.framework.TestCase;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by tusizi on 2015/12/1.
@@ -22,6 +21,7 @@ public class AticleDaoTest extends TestCase {
         a.setTitle("测试文章"+r.nextInt(99999));
         a.setContent("测试内容" + r.nextInt(99999));
         a.setHeadline(true);
+        a.setCreatetime(new Date());
         articleDao.addArticle(a);
     }
 //    将文章放在某个频道里，测试文章和频道表即t_channel_article表
@@ -68,5 +68,41 @@ public class AticleDaoTest extends TestCase {
         //将channels放入a中
         a.setChannels(channels);
         articleDao.addArticle(a);
+    }
+    public void testDelArticle(){
+        BeanFactory factory = new PropertiesBeanFactory("beans.properties");
+        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
+        articleDao.delArticles( new String[]{"1","2"});
+    }
+    public void testFindArticleById(){
+        BeanFactory factory = new PropertiesBeanFactory("beans.properties");
+        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
+        Article article = articleDao.findArticleById(4);
+        System.out.println(article.getId());
+
+    }
+    public void testFindArticlesByTitle(){
+        BeanFactory factory = new PropertiesBeanFactory("beans.properties");
+        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
+        PageVO pageVO = articleDao.findArticles("1",0,5);
+        System.out.println("总记录数:"+pageVO.getTotal());
+        List datas = pageVO.getDatas();
+        for(Iterator iterator = datas.iterator();iterator.hasNext();){
+            Article a = (Article) iterator.next();
+            System.out.println(a.getId()+a.getTitle());
+        }
+    }
+    public void testFindArticlesByChnnel(){
+        BeanFactory factory = new PropertiesBeanFactory("beans.properties");
+        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
+        Channel c = new Channel();
+        c.setId(1);
+        PageVO pageVO = articleDao.findArticles(c,0,5);
+        System.out.println("总记录数:"+pageVO.getTotal());
+        List datas = pageVO.getDatas();
+        for(Iterator iterator = datas.iterator();iterator.hasNext();){
+            Article a = (Article) iterator.next();
+            System.out.println(a.getId()+a.getTitle());
+        }
     }
 }

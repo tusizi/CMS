@@ -5,6 +5,7 @@
 <configuration>
     <typeAliases>
         <typeAlias type="cn.com.leadfar.cms.backend.model.Admin" alias="Admin"/>
+        <typeAlias type="cn.com.leadfar.cms.backend.model.Article" alias="Article"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
@@ -19,5 +20,6 @@
     </environments>
     <mappers>
         <mapper resource="cn/com/leadfar/cms/backend/dao/impl/Admin.xml" />
+        <mapper resource="cn/com/leadfar/cms/backend/dao/impl/Article.xml" />
     </mappers>
 </configuration>

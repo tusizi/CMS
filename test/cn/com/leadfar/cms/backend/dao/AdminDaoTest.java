@@ -21,7 +21,9 @@ public class AdminDaoTest extends TestCase {
         admin.setPassword("测试密码"+r.nextInt());
         adminDao.addAdmin(admin);
     }
-    public Admin testFindAdminByUsername(String username){
-        return null;
+    public void testFindAdminByUsername(String username){
+        AdminDao adminDao = (AdminDao) factory.getBean("adminDao");
+        Admin a = adminDao.findAdminByUsername("admin");
+        System.out.println(a.getUsername()+","+a.getPassword());
     }
 }
