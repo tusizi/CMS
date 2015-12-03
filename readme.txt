@@ -70,3 +70,5 @@ url-pattern 的定义只有三种形式：
     分页查询的封装 - 利用TheadLocal设计模式
 
     将SqlSessjion类封装
+
+    关注文章管理的添加、更新界面

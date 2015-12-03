@@ -72,7 +72,7 @@ public class AticleDaoTest extends TestCase {
     public void testDelArticle(){
         BeanFactory factory = new PropertiesBeanFactory("beans.properties");
         ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
-        articleDao.delArticles( new String[]{"1","2"});
+        articleDao.delArticles( new String[]{"1"});
     }
     public void testFindArticleById(){
         BeanFactory factory = new PropertiesBeanFactory("beans.properties");
@@ -104,5 +104,15 @@ public class AticleDaoTest extends TestCase {
             Article a = (Article) iterator.next();
             System.out.println(a.getId()+a.getTitle());
         }
+    }
+
+    public void testUpdateArticle(){
+        BeanFactory factory = new PropertiesBeanFactory("beans.properties");
+        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
+        Article a =new Article();
+        a.setId(1);
+        a.setTitle("测试更新文章");
+        a.setContent("测试更新文章内容");
+        articleDao.updateArticle(a);
     }
 }

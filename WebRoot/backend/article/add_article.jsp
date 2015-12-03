@@ -100,7 +100,7 @@ fieldset div {
 <body>
 <div id="formwrapper">
 	<h3>编辑网站文章</h3>
-	<form action="ArticleServlet" method="post">
+	<form action="ArticleServlet" method="add">
 		<input type="hidden" name="method" value="add">
 	<fieldset>
 		<legend>文章基本信息</legend>

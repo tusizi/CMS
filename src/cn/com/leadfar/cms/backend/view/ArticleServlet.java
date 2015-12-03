@@ -44,17 +44,7 @@ public class ArticleServlet extends BaseServlet {
         String title = request.getParameter("title");
         PageVO pv = articleDao.findArticles(title, offset, pagesize);
         request.setAttribute("pv", pv);
-//        //将共有多少页total传递
-//        int maxPage = total / pagesize;
-//        if (total % pagesize !=0){
-//            maxPage = maxPage +1;
-//        }
-//        request.setAttribute("maxPage",maxPage);
-//        //传递现在是多少页currentPage
-//        int currentPage = offset / pagesize + 1;
-//        request.setAttribute("currentPage",currentPage);
-//        //传递共有几条记录
-        //forward到article_list.jsp
+        System.out.println(pv);
         request.getRequestDispatcher("/backend/article/article_list.jsp").forward(request, response);
     }
 

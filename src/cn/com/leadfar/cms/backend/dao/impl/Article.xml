@@ -16,6 +16,10 @@
     <delete id="delArticles" parameterType="int">
         delete from t_article where id = #{id}
     </delete>
+
+    <delete id="delChannel_Articles" parameterType="int">
+        delete from t_channel_article where articleId = #{articleId}
+    </delete>
     <select id="findArticleById" parameterType="int" resultType="Article">
         select * from t_article where id = #{id}
     </select>
@@ -57,5 +61,15 @@
             </otherwise>
         </choose>
     </select>
+
+    <update id="updateArticle" parameterType="Article">
+        update t_article set
+        title=#{title}, content=#{content}, source =#{source},
+        author=#{author},keyword=#{keyword},intro=#{intro},type=#{type},
+		recommend=#{recommend},headline=#{headline},topicId=#{topicId},
+		createtime=#{createtime},updatetime=#{updatetime},deploytime=#{deploytime},
+		adminId=#{adminId}
+        where id =#{id}
+    </update>
 </mapper>
 

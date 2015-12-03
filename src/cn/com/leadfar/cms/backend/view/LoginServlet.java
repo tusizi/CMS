@@ -37,6 +37,7 @@ public class LoginServlet extends BaseServlet {
     }
     //生成验证码
     public void checkcode(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       System.out.println("checkcode");
         response.setContentType("image/jpeg");
         //创建一张图片
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
@@ -81,8 +82,6 @@ public class LoginServlet extends BaseServlet {
         out.flush();
         out.close();
     }
-
-
     //从max到min随机生成一个数
     //生成5~15之间的数
     private int random(int max, int min) {
@@ -92,7 +91,7 @@ public class LoginServlet extends BaseServlet {
 
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //super.doPost(request, response);
-
+        System.out.println("admin logins");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String checkcode = request.getParameter("checkcode");
@@ -125,7 +124,6 @@ public class LoginServlet extends BaseServlet {
         }
         //需要将用户的信息存放到http session中
         request.getSession().setAttribute("LOGIN_ADMIN", username);
-
         //判断通过，转到main.jsp页面
         //重定向
         response.sendRedirect(request.getContextPath() + "/backend/main.jsp");

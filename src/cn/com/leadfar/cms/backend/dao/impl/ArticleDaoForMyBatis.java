@@ -47,6 +47,7 @@ public class ArticleDaoForMyBatis implements ArticleDao {
         try{
             for (String id:ids){
             session.delete(Article.class.getName()+".delArticles",Integer.parseInt(id));
+            session.delete(Article.class.getName()+".delChannel_Articles",Integer.parseInt(id));
         }
             session.commit();
         }catch (Exception e) {
@@ -134,6 +135,18 @@ public class ArticleDaoForMyBatis implements ArticleDao {
 
     @Override
     public void updateArticle(Article a) {
+        SqlSession session = MyBatisUtil.getSession();
+        try{
+            //Article.class.getName()得到class的全路径类名
+            session.update(Article.class.getName()+".updateArticle",a);
+            session.commit();
+        }catch (Exception e) {
+            e.printStackTrace();
+            session.rollback();
+        } finally{
+            //关闭
+            session.close();
+        }
 
     }
 }

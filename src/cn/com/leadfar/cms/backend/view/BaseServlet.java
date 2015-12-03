@@ -62,7 +62,8 @@ public class BaseServlet extends HttpServlet {
         String method = request.getParameter("method");
         //如果客户端不传递method参数，默认调用execute方法
         if (method ==null || method.trim().equals("")){
-
+            execute(request,response);
+            System.out.println("execute");
         }else {
             //根据method的取值调用相关的方法
             try {

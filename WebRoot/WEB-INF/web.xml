@@ -4,9 +4,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
     <servlet>
-        <servlet-name>CheckcodeServlet</servlet-name>
-        <servlet-class>cn.com.leadfar.cms.backend.view.CheckcodeServlet</servlet-class>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>cn.com.leadfar.cms.backend.view.LoginServlet</servlet-class>
         <init-param>
             <param-name>width</param-name>
             <param-value>52</param-value>
@@ -25,26 +26,8 @@
         </init-param>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CheckcodeServlet</servlet-name>
-        <url-pattern>/backend/images/checkcode.jpg</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>cn.com.leadfar.cms.backend.view.LoginServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/backend/LoginServlet</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>cn.com.leadfar.cms.backend.view.LogoutServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LogoutServlet</servlet-name>
-        <url-pattern>/backend/LogoutServlet</url-pattern>
     </servlet-mapping>
 
     <filter>
