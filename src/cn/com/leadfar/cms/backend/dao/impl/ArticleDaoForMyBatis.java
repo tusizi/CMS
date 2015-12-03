@@ -139,7 +139,17 @@ public class ArticleDaoForMyBatis implements ArticleDao {
         try{
             //Article.class.getName()得到class的全路径类名
             session.update(Article.class.getName()+".updateArticle",a);
+            session.delete(Article.class.getName()+".delChannel_Articles",a.getId());
+            Set<Channel> channels=a.getChannels();
+            if (channels !=null){
+                for (Channel c:channels){
+                    Map param = new  HashMap();
+                    param.put("a",a);
+                    param.put("c",c);
+                    session.insert(Article.class.getName()+".insert_channel_article",param);
+                }
             session.commit();
+            }
         }catch (Exception e) {
             e.printStackTrace();
             session.rollback();
@@ -147,6 +157,5 @@ public class ArticleDaoForMyBatis implements ArticleDao {
             //关闭
             session.close();
         }
-
     }
 }

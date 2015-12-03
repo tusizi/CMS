@@ -114,6 +114,41 @@ fieldset div {
 			<input type="text" name="source" id="source" value="" size="30" maxlength="100" /> 
 			*(最多100个字符)<br />	
 		</div>
+        <div>
+            <label for="author">作者</label>
+            <input type="text" name="author" id="author" value="" size="30" maxlength="100" />
+        </div>
+        <div>
+            <label for="keyword">关键字</label>
+            <input type="text" name="keyword" id="keyword" value="" size="30" maxlength="100" />
+        </div>
+
+        <div>
+            <label for="type">分类</label>
+            <select name ="type" id ="type">
+                <option value="原创">原创</option>
+                <option value="转载">转载</option>
+            </select>
+        </div>
+        <div>
+            <label></label>
+            <input type="checkbox" name="recommend" id="recommend" value="true"/>是否为推荐阅读
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" name="headline" id="headline" value="true"/>是否为首页头条
+        </div>
+        <div>
+            <label for="channelIds">所属频道</label>
+            <select name ="channelIds" id ="channelIds" multiple="multiple">
+                <c:forEach items="${channelIds}" var="c">
+                    <option value="${c.id}">${c.name}</option>
+                </c:forEach>
+            </select>
+        </div>
+        <div>
+            <label for="intro">简介</label>
+            <textarea rows="5" cols="100" name="intro" id="intro"></textarea>
+            <br />
+        </div>
 		<div>
 			<label for="content">文章内容</label>
 			<textarea rows="20" cols="100" name="content" id="content"></textarea>
