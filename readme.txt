@@ -72,3 +72,5 @@ url-pattern 的定义只有三种形式：
     将SqlSessjion类封装
 
     关注文章管理的添加、更新界面
+
+    利用apache-commons-beanutils对请求参数的处理进行封装
