@@ -67,7 +67,7 @@
         title=#{title}, content=#{content}, source =#{source},
         author=#{author},keyword=#{keyword},intro=#{intro},type=#{type},
 		recommend=#{recommend},headline=#{headline},topicId=#{topicId},
-		createtime=#{createtime},updatetime=#{updatetime},deploytime=#{deploytime},
+		updatetime=#{updatetime},
 		adminId=#{adminId}
         where id =#{id}
     </update>

@@ -72,11 +72,6 @@
         </init-param>
         <load-on-startup>0</load-on-startup>
     </servlet>
-    <servlet>
-        <servlet-name>InitMigrationServlet</servlet-name>
-        <servlet-class>cn.com.leadfar.cms.backend.view.InitMigrationServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
