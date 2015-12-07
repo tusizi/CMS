@@ -7,10 +7,7 @@ import cn.com.leadfar.cms.backend.vo.PageVO;
 import cn.com.leadfar.cms.utils.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by tusizi on 2015/12/2.
@@ -18,6 +15,7 @@ import java.util.Set;
 public class ArticleDaoForMyBatis implements ArticleDao {
     @Override
     public void addArticle(Article a) {
+        a.setCreatetime(new Date());
         SqlSession session = MyBatisUtil.getSession();
         try {
             //插入
@@ -136,6 +134,7 @@ public class ArticleDaoForMyBatis implements ArticleDao {
 
     @Override
     public void updateArticle(Article a) {
+        a.setUpdatetime(new Date());
         SqlSession session = MyBatisUtil.getSession();
         try {
             //Article.class.getName()得到class的全路径类名

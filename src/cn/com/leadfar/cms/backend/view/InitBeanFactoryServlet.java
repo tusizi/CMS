@@ -1,7 +1,9 @@
 package cn.com.leadfar.cms.backend.view;
 
 import cn.com.leadfar.cms.utils.BeanFactory;
+import cn.com.leadfar.cms.utils.ChannelsSetConverter;
 import cn.com.leadfar.cms.utils.PropertiesBeanFactory;
+import org.apache.commons.beanutils.ConvertUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * Created by tusizi on 2015/11/17.
@@ -26,7 +29,8 @@ public class InitBeanFactoryServlet extends HttpServlet {
         }else{
             factory = new PropertiesBeanFactory(configLocation);
         }
-
         config.getServletContext().setAttribute(INIT_FACTORY_NAME,factory);
+        //初始化BeanUtils的转换器
+        ConvertUtils.register(new ChannelsSetConverter(),Set.class);
     }
 }

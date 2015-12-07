@@ -5,6 +5,7 @@ import cn.com.leadfar.cms.backend.dao.ChannelDao;
 import cn.com.leadfar.cms.backend.model.Article;
 import cn.com.leadfar.cms.backend.model.Channel;
 import cn.com.leadfar.cms.backend.vo.PageVO;
+import cn.com.leadfar.cms.utils.RequestUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -56,43 +57,7 @@ public class ArticleServlet extends BaseServlet {
 
     //添加文章
     public void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        //从request中获取参数
-        String title = request.getParameter("title");
-        String content = request.getParameter("content");
-        String source = request.getParameter("source");
-        String author = request.getParameter("author");
-        String keyword = request.getParameter("keyword");
-        String intro = request.getParameter("intro");
-        String type = request.getParameter("type");
-        String recommend = request.getParameter("recommend");
-        String headline = request.getParameter("headline");
-        String channelIds[] = request.getParameterValues("channelIds");
-        Article a = new Article();
-        a.setTitle(title);
-        a.setContent(content);
-        a.setSource(source);
-        a.setAuthor(author);
-        a.setKeyword(keyword);
-        a.setIntro(intro);
-        a.setType(type);
-        if (recommend != null) {
-            a.setRecommend(Boolean.parseBoolean(recommend));
-        }
-        if (headline != null) {
-            a.setHeadline(Boolean.parseBoolean(headline));
-        }
-        if (channelIds != null) {
-            Set channels = new HashSet();
-            for (String channelId : channelIds) {
-                Channel c = new Channel();
-                c.setId(Integer.parseInt(channelId));
-                channels.add(c);
-            }
-            a.setChannels(channels);
-        }
-        a.setCreatetime(new Date());
-
+        Article a = (Article)RequestUtil.copyParam(Article.class, request);
         articleDao.addArticle(a);
         request.getRequestDispatcher("/backend/article/add_article_success.jsp").forward(request, response);
     }
@@ -135,43 +100,7 @@ public class ArticleServlet extends BaseServlet {
     //更新文章
     public void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        //接受到更新的内容，包括（title content）
-        String id = request.getParameter("id");
-        String title = request.getParameter("title");
-        String content = request.getParameter("content");
-        String source = request.getParameter("source");
-        String author = request.getParameter("author");
-        String keyword = request.getParameter("keyword");
-        String intro = request.getParameter("intro");
-        String type = request.getParameter("type");
-        String recommend = request.getParameter("recommend");
-        String headline = request.getParameter("headline");
-        String channelIds[] = request.getParameterValues("channelIds");
-        Article a = new Article();
-        a.setId(Integer.parseInt(id));
-        a.setTitle(title);
-        a.setContent(content);
-        a.setSource(source);
-        a.setAuthor(author);
-        a.setKeyword(keyword);
-        a.setIntro(intro);
-        a.setType(type);
-        if (recommend != null) {
-            a.setRecommend(Boolean.parseBoolean(recommend));
-        }
-        if (headline != null) {
-            a.setHeadline(Boolean.parseBoolean(headline));
-        }
-        if (channelIds != null) {
-            Set channels = new HashSet();
-            for (String channelId : channelIds) {
-                Channel c = new Channel();
-                c.setId(Integer.parseInt(channelId));
-                channels.add(c);
-            }
-            a.setChannels(channels);
-        }
-        a.setUpdatetime(new Date());
+        Article a  = (Article) RequestUtil.copyParam(Article.class,request);
         articleDao.updateArticle(a);
         //farword 到更新成功的界面
         request.getRequestDispatcher("/backend/article/update_article_success.jsp").forward(request, response);

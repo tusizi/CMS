@@ -100,7 +100,7 @@ fieldset div {
 <body>
 <div id="formwrapper">
 	<h3>编辑网站文章</h3>
-	<form action="ArticleServlet" method="add">
+	<form action="ArticleServlet" method="post">
 		<input type="hidden" name="method" value="add">
 	<fieldset>
 		<legend>文章基本信息</legend>
@@ -137,8 +137,8 @@ fieldset div {
             <input type="checkbox" name="headline" id="headline" value="true"/>是否为首页头条
         </div>
         <div>
-            <label for="channelIds">所属频道</label>
-            <select name ="channelIds" id ="channelIds" multiple="multiple">
+            <label for="channels">所属频道</label>
+            <select name ="channels" id ="channels" multiple="multiple">
                 <c:forEach items="${channelIds}" var="c">
                     <option value="${c.id}">${c.name}</option>
                 </c:forEach>

@@ -32,6 +32,7 @@ public class AdminDaoForMyBatis implements AdminDao {
     @Override
     public Admin findAdminByUsername(String username) {
         Admin admin = null;
+
         //打开一个Session
         SqlSession session = MyBatisUtil.getSession();
         try {
