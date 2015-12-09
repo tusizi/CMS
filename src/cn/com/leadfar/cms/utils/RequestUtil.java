@@ -23,8 +23,8 @@ public class RequestUtil {
          Object entity = entityClass.newInstance();
          //取出request中的参数
          Map allParams = request.getParameterMap();
-         Set entities = allParams.entrySet();
-         for (Iterator iterator = entities.iterator();iterator.hasNext();){
+         Set entries = allParams.entrySet();
+         for (Iterator iterator = entries.iterator();iterator.hasNext();){
              Map.Entry entry = (Map.Entry)iterator.next();
              String name = (String) entry.getKey();
              String[] value = (String[]) entry.getValue();
@@ -36,6 +36,7 @@ public class RequestUtil {
                  }
              }
          }
+         return entity;
      } catch (Exception e) {
          e.printStackTrace();
      }

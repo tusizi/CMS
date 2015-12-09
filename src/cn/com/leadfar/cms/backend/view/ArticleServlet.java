@@ -57,7 +57,9 @@ public class ArticleServlet extends BaseServlet {
 
     //添加文章
     public void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("add");
         Article a = (Article)RequestUtil.copyParam(Article.class, request);
+        System.out.println("addArticle");
         articleDao.addArticle(a);
         request.getRequestDispatcher("/backend/article/add_article_success.jsp").forward(request, response);
     }
