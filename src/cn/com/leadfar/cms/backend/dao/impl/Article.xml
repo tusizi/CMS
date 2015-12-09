@@ -20,7 +20,7 @@
     <delete id="delChannel_Articles" parameterType="int">
         delete from t_channel_article where articleId = #{articleId}
     </delete>
-    <select id="findArticleById" parameterType="int" resultType="Article">
+    <select id="findById" parameterType="int" resultType="Article">
         select * from t_article where id = #{id}
     </select>
 
@@ -62,7 +62,7 @@
         </choose>
     </select>
 
-    <update id="updateArticle" parameterType="Article">
+    <update id="update" parameterType="Article">
         update t_article set
         title=#{title}, content=#{content}, source =#{source},
         author=#{author},keyword=#{keyword},intro=#{intro},type=#{type},

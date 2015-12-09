@@ -12,7 +12,7 @@ import java.util.*;
 /**
  * Created by tusizi on 2015/12/2.
  */
-public class ArticleDaoForMyBatis implements ArticleDao {
+public class ArticleDaoForMyBatis extends BaseDao implements ArticleDao {
     @Override
     public void addArticle(Article a) {
         a.setCreatetime(new Date());
@@ -62,74 +62,25 @@ public class ArticleDaoForMyBatis implements ArticleDao {
 
     @Override
     public Article findArticleById(int id) {
-        SqlSession session = MyBatisUtil.getSession();
-        Article article = null;
-        try {
-            article = (Article) session.selectOne(Article.class.getName() + ".findArticleById", id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            //关闭
-            session.close();
-        }
-        return article;
+        return (Article)findById(Article.class,id);
     }
-
 
     @Override
     public PageVO findArticles(String title, int offset, int pagesize) {
-        SqlSession session = MyBatisUtil.getSession();
-        int total = 0;
-        List datas = null;
-        try {
-            Map map = new HashMap();
-            map.put("title", "%" + title + "%");
-            map.put("offset", offset);
-            map.put("pagesize", pagesize);
-            //查询当前页面的文章数
-            datas = session.selectList(Article.class.getName() + ".findArticlesByTitle", map);
-            //查询总记录数
-            total = (Integer) session.selectOne(Article.class.getName() + ".findArticlesByTitle-count", map);
-            session.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.rollback();
-        } finally {
-            //关闭
-            session.close();
-        }
-        PageVO pageVO = new PageVO();
-        pageVO.setDatas(datas);
-        pageVO.setTotal(total);
-        return pageVO;
+        Map params = new HashMap();
+        params.put("title", "%" + title + "%");
+        params.put("offset", offset);
+        params.put("pagesize", pagesize);
+        return findPaginated(Article.class.getName() + ".findArticlesByTitle",params);
     }
 
     @Override
     public PageVO findArticles(Channel channel, int offset, int pagesize) {
-        SqlSession session = MyBatisUtil.getSession();
-        int total = 0;
-        List datas = null;
-        try {
-            Map map = new HashMap();
-            map.put("c", channel);
-            map.put("offset", offset);
-            map.put("pagesize", pagesize);
-            //查询当前页面的文章数
-            datas = session.selectList(Article.class.getName() + ".findArticlesByChannel", map);
-            //查询总记录数
-            total = (Integer) session.selectOne(Article.class.getName() + ".findArticlesByChannel-count", map);
-            session.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.rollback();
-        } finally {
-            //关闭
-            session.close();
-        }
-        PageVO pageVO = new PageVO();
-        pageVO.setDatas(datas);
-        pageVO.setTotal(total);
-        return pageVO;
+        Map params = new HashMap();
+        params.put("c", channel);
+        params.put("offset", offset);
+        params.put("pagesize", pagesize);
+        return findPaginated(Article.class.getName() + ".findArticlesByChannel",params);
     }
 
     @Override
