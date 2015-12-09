@@ -17,7 +17,7 @@ public class ChannelServlet extends BaseServlet {
     @Override
     protected void execute(HttpServletRequest request,
                            HttpServletResponse response) throws ServletException, IOException {
-        PageVO pv = channelDao.findChannels(getOffset(request),getPagesize(request));
+        PageVO pv = channelDao.findChannels();
         request.setAttribute("pv", pv);
         //forward��channel_list.jsp
         request.getRequestDispatcher("/backend/channel/channel_list.jsp").forward(request, response);
