@@ -11,8 +11,8 @@ public interface ArticleDao {
     public void addArticle(Article a);
     public void delArticles(String[] ids);
     public Article findArticleById(int id);
-    public PageVO findArticles(String title,int offset,int pagesize);
+    public PageVO findArticles(String title);
     //重载findArticles方法
-    public PageVO findArticles(Channel channel,int offset,int pagesize);
+    public PageVO findArticles(Channel channel);
     public void updateArticle(Article a);
 }

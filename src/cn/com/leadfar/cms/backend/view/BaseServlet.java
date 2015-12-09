@@ -1,5 +1,6 @@
 package cn.com.leadfar.cms.backend.view;
 
+import cn.com.leadfar.cms.SystemContext;
 import cn.com.leadfar.cms.utils.BeanFactory;
 
 import javax.servlet.ServletException;
@@ -44,8 +45,17 @@ public class BaseServlet extends HttpServlet {
                 }
             }
         }
-       //执行父类的职责，根据请求时get还是post，决定调用doGet还是doPost方法
-        super.service(req, resp);
+        try {
+            //取出offset,pagesize,设置到TheadLocal中
+            SystemContext.setOffset(getOffset(req));
+            SystemContext.setPagesize(getPagesize(req));
+            //执行父类的职责，根据请求时get还是post，决定调用doGet还是doPost方法
+            super.service(req, resp);
+        }finally {
+            SystemContext.removeOffset();
+            SystemContext.removePagesize();
+        }
+
     }
 
     @Override
@@ -80,5 +90,33 @@ public class BaseServlet extends HttpServlet {
     protected void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //什么也不做
     }
+    public int getOffset(HttpServletRequest request){
+        int offset = 0;
+        //希望从request中获取pager.offset
+        try {
+            offset = Integer.parseInt(request.getParameter("pager.offset"));
+        } catch (Exception ignore) {
+        }
+        return offset;
+    }
+    public int getPagesize(HttpServletRequest request){
+        int pagesize = 5;
+        //如果从request中传递过来pagesize,那么就需要更新http session中的pagesize
+        if (request.getParameter("pagesize") != null) {
+            request.getSession().setAttribute("pagesize",
+                    Integer.parseInt(request.getParameter("pagesize"))
+            );
+        }
+        //希望从http session中获取pagesize
+        Integer ps = (Integer) request.getSession().getAttribute("pagesize");
+        if (ps == null) {
+            pagesize = 5;
+            request.getSession().setAttribute("pagesize", pagesize);
+        } else {
+            pagesize = ps;
+        }
+        return pagesize;
+    }
+
 }
 

@@ -8,5 +8,5 @@ public interface ChannelDao {
 	public void delChannels(String[] ids);
 	public Object findChannelById(int channelId);
 	public void updateChannel(Channel c);
-	public PageVO findChannels(int offset, int pagesize);
+	public PageVO findChannels();
 }

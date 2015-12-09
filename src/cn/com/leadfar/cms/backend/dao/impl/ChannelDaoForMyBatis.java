@@ -26,10 +26,8 @@ public class ChannelDaoForMyBatis extends BaseDao implements ChannelDao {
        return (Channel)findById(Channel.class,channelId);
     }
 
-    public PageVO findChannels(int offset, int pagesize) {
+    public PageVO findChannels() {
         Map params = new HashMap();
-        params.put("offset", offset);
-        params.put("pagesize", pagesize);
         return  findPaginated(Channel.class.getName() + ".findPaginated",params);
     }
 

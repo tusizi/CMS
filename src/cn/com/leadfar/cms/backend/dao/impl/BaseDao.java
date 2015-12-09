@@ -1,5 +1,6 @@
 package cn.com.leadfar.cms.backend.dao.impl;
 
+import cn.com.leadfar.cms.SystemContext;
 import cn.com.leadfar.cms.backend.model.Channel;
 import cn.com.leadfar.cms.backend.vo.PageVO;
 import cn.com.leadfar.cms.utils.MyBatisUtil;
@@ -104,6 +105,9 @@ public class BaseDao {
         List datas = null;
         int total = 0;
         try {
+            //取出分页参数
+            params.put("offset", SystemContext.getOffset());
+            params.put("pagesize",SystemContext.getPagesize());
             datas = session.selectList(sqlId, params);
             total = (Integer) session.selectOne(sqlId+"-count",params);
         } catch (Exception e) {
