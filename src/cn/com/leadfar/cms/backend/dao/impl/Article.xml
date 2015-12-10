@@ -29,6 +29,7 @@
         <if test="title!=null">
             where title like #{title}
         </if>
+        order by createtime desc
              limit #{offset},#{pagesize}
     </select>
 
@@ -48,6 +49,7 @@
             select * from t_article
         </otherwise>
         </choose>
+        order by createtime desc
         limit #{offset},#{pagesize}
     </select>
 
@@ -71,5 +73,11 @@
 		adminId=#{adminId}
         where id =#{id}
     </update>
+    <select id="findHeadline" parameterType="int" resultType="Article">
+        select * from t_article where headline = true order by createtime desc limit 0,#{max}
+    </select>
+    <select id="findRecommend" parameterType="int" resultType="Article">
+        select * from t_article where recommend = true order by createtime desc limit 0,#{max}
+    </select>
 </mapper>
 

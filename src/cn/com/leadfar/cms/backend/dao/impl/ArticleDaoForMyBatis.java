@@ -1,5 +1,6 @@
 package cn.com.leadfar.cms.backend.dao.impl;
 
+import cn.com.leadfar.cms.SystemContext;
 import cn.com.leadfar.cms.backend.dao.ArticleDao;
 import cn.com.leadfar.cms.backend.model.Article;
 import cn.com.leadfar.cms.backend.model.Channel;
@@ -73,10 +74,46 @@ public class ArticleDaoForMyBatis extends BaseDao implements ArticleDao {
     }
 
     @Override
-    public PageVO findArticles(Channel channel) {
+    public List findHeadline(int max) {
+        SqlSession session = MyBatisUtil.getSession();
+        try {
+            return session.selectList(Article.class.getName()+".findHeadline",max);
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.rollback();
+        } finally {
+            //关闭
+            session.close();
+        }
+        return null;
+    }
+
+
+
+    @Override
+    public List findRecommend(int max) {
+        SqlSession session = MyBatisUtil.getSession();
+        try {
+            return session.selectList(Article.class.getName()+".findRecommend",max);
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.rollback();
+        } finally {
+            //关闭
+            session.close();
+        }
+        return null;
+    }
+
+
+    @Override
+    public List findArticles(Channel channel, int max ) {
         Map params = new HashMap();
         params.put("c", channel);
-        return findPaginated(Article.class.getName() + ".findArticlesByChannel",params);
+        SystemContext.setPagesize(max);
+        SystemContext.setOffset(0);
+       PageVO pageVO= findPaginated(Article.class.getName() + ".findArticlesByChannel",params);
+        return pageVO.getDatas();
     }
 
     @Override

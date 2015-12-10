@@ -84,7 +84,7 @@ public class AticleDaoTest extends TestCase {
     public void testFindArticlesByTitle(){
         BeanFactory factory = new PropertiesBeanFactory("beans.properties");
         ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
-        PageVO pageVO = articleDao.findArticles("1",0,5);
+        PageVO pageVO = articleDao.findArticles("1");
         System.out.println("总记录数:"+pageVO.getTotal());
         List datas = pageVO.getDatas();
         for(Iterator iterator = datas.iterator();iterator.hasNext();){
@@ -92,27 +92,27 @@ public class AticleDaoTest extends TestCase {
             System.out.println(a.getId()+a.getTitle());
         }
     }
-    public void testFindArticlesByChnnel(){
-        BeanFactory factory = new PropertiesBeanFactory("beans.properties");
-        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
-        Channel c = new Channel();
-        c.setId(1);
-        PageVO pageVO = articleDao.findArticles(c,0,5);
-        System.out.println("总记录数:"+pageVO.getTotal());
-        List datas = pageVO.getDatas();
-        for(Iterator iterator = datas.iterator();iterator.hasNext();){
-            Article a = (Article) iterator.next();
-            System.out.println(a.getId()+a.getTitle());
-        }
-    }
-
-    public void testUpdateArticle(){
-        BeanFactory factory = new PropertiesBeanFactory("beans.properties");
-        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
-        Article a =new Article();
-        a.setId(1);
-        a.setTitle("测试更新文章");
-        a.setContent("测试更新文章内容");
-        articleDao.updateArticle(a);
-    }
+//    public void testFindArticlesByChnnel(){
+//        BeanFactory factory = new PropertiesBeanFactory("beans.properties");
+//        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
+//        Channel c = new Channel();
+//        c.setId(1);
+//        PageVO pageVO = articleDao.findArticles(c);
+//        System.out.println("总记录数:"+pageVO.getTotal());
+//        List datas = pageVO.getDatas();
+//        for(Iterator iterator = datas.iterator();iterator.hasNext();){
+//            Article a = (Article) iterator.next();
+//            System.out.println(a.getId()+a.getTitle());
+////        }
+//    }
+//
+//    public void testUpdateArticle(){
+//        BeanFactory factory = new PropertiesBeanFactory("beans.properties");
+//        ArticleDao articleDao= (ArticleDao) factory.getBean("articleDao");
+//        Article a =new Article();
+//        a.setId(1);
+//        a.setTitle("测试更新文章");
+//        a.setContent("测试更新文章内容");
+//        articleDao.updateArticle(a);
+//    }
 }

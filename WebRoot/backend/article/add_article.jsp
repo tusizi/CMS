@@ -162,7 +162,7 @@ fieldset div {
 		<div class="enter">
 		    <input name="submit" type="submit" class="buttom" value="提交" />
 		    <input name="reset" type="reset" class="buttom" value="重置" />
-		    <input name="return" type="button" class="buttom" value="返回列表页面" onclick="window.location = 'SearchArticlesServlet'"/>
+		    <input name="return" type="button" class="buttom" value="返回列表页面" onclick="window.location = 'ArticleServlet'"/>
 		</div>
 	</fieldset>
 	</form>

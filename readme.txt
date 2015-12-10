@@ -74,3 +74,6 @@ url-pattern 的定义只有三种形式：
     关注文章管理的添加、更新界面
 
     利用apache-commons-beanutils对请求参数的处理进行封装
+
+    利用ThreadLocal设计模式传递offset和pagesize参数
+
