@@ -16,68 +16,18 @@
 	</div>
 </div>
 <!-- 首页的导航条 -->
-<jsp:include page="NavServlet"
+<jsp:include page="NavServlet?method=navList"></jsp:include>
 <!-- 首页中间 -->
 <div id="mid">
 	<!-- 首页左边 -->
 	<div id="left">
 		<!-- 首页图片及首页文章标题、简介 -->
-		<div style="width:100%;border:0px;text-align: left;">
-			<img style="float:left;width:200px;height:200px;" src="images/earth.jpg">
-			<c:forEach items="${headline}" var="h">
-				<h4>${h.title}</h4>
-				<p>${h.intro}</p>
-			</c:forEach>
-		</div>
+		<jsp:include page="NavServlet?method=headLine"/>
 		<!-- 底下是专题或频道的文章标题列表 -->
-		<div class="index_topic">
-			<img src="images/jiantou.gif" style="float:left">
-			<span style="margin-top:8px;float:left;FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #852b2b; FONT-FAMILY: 宋体;">JavaSE</span>
-			<a href="#"><img src="images/more_gray.gif" style="float:right;border:0px"></a>
-			<c:forEach items="${c1}" var="c">
-				<div class="index_topic_list">
-					<img src="images/h_article.gif" >
-					<a href="#">${c.title}</a>
-					<span><fmt:formatDate value="${c.createtime}"/></span>
-				</div>
-			</c:forEach>
-		</div>
-		<div class="index_topic">
-			<img src="images/jiantou.gif" style="float:left">
-			<span style="margin-top:8px;float:left;FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #852b2b; FONT-FAMILY: 宋体;">JavaEE</span>
-			<a href="#"><img src="images/more_gray.gif" style="float:right;border:0px"></a>
-			<c:forEach items="${c1}" var="c">
-				<div class="index_topic_list">
-					<img src="images/h_article.gif" >
-					<a href="#">${c.title}</a>
-					<span><fmt:formatDate value="${c.createtime}"/></span>
-				</div>
-			</c:forEach>
-		</div>
-		<div class="index_topic">
-			<img src="images/jiantou.gif" style="float:left">
-			<span style="margin-top:8px;float:left;FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #852b2b; FONT-FAMILY: 宋体;">JBPM</span>
-			<a href="#"><img src="images/more_gray.gif" style="float:right;border:0px"></a>
-			<c:forEach items="${c1}" var="c">
-				<div class="index_topic_list">
-					<img src="images/h_article.gif" >
-					<a href="#">${c.title}</a>
-					<span><fmt:formatDate value="${c.createtime}"/></span>
-				</div>
-			</c:forEach>
-		</div>
-		<div class="index_topic">
-			<img src="images/jiantou.gif" style="float:left">
-			<span style="margin-top:8px;float:left;FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #852b2b; FONT-FAMILY: 宋体;">Anjroid</span>
-			<a href="#"><img src="images/more_gray.gif" style="float:right;border:0px"></a>
-			<c:forEach items="${c1}" var="c">
-				<div class="index_topic_list">
-					<img src="images/h_article.gif" >
-					<a href="#">${c.title}</a>
-					<span><fmt:formatDate value="${c.createtime}"/></span>
-				</div>
-			</c:forEach>
-		</div>
+	<jsp:include page="NavServlet?method=indexChannelArticleList&channelId=1"/>
+	<jsp:include page="NavServlet?method=indexChannelArticleList&channelId=2"/>
+	<jsp:include page="NavServlet?method=indexChannelArticleList&channelId=3"/>
+	<jsp:include page="NavServlet?method=indexChannelArticleList&channelId=4"/>
 	</div>
 	<!-- 首页右边 -->
 	<div class="right">
@@ -97,33 +47,8 @@
 		</div>
 	</div>
 	
-	<div class="right" style="height:200px">
-		<div class="right_topic_1">
-			推荐阅读
-		</div>
-		<div class="right_topic_2">
-			<a href="#"><img src="images/more_red.gif" style="float:right;margin-top:10px;border:0px"></a>
-		</div>
-		<div class="right_topic_3">
-			<c:forEach items="${recommend}" var="r">
-				·<a href="#">${r.title}</a><br/>
-			</c:forEach>
-		</div>
-	</div>
-	
-	<div class="right" style="height:300px">
-		<div class="right_topic_1">
-			最新发表
-		</div>
-		<div class="right_topic_2">
-			<a href="#"><img src="images/more_red.gif" style="float:right;margin-top:10px;border:0px"></a>
-		</div>
-		<div class="right_topic_3">
-			<c:forEach items="${latest}" var="l">
-				· <a href="#">${l.title}</a><br/>
-			</c:forEach>
-		</div>
-	</div>
+	<jsp:include page="NavServlet?method=recommendArticle"/>
+	<jsp:include page="NavServlet?method=latestArticle"/>
 	
 	<div class="right" style="height:340px">
 		<div class="right_topic_1">

@@ -6,7 +6,7 @@
 <!-- 首页的导航条 -->
 <div id="nav">
 	<div id="menu">
-		<a href="NavServlet">首页</a>
+		<a href="index.jsp">首页</a>
 		<c:forEach items="${channels}" var="c">
 			<a href="NavServlet?method=channelList&channelId=${c.id}">${c.name}</a>
 		</c:forEach>

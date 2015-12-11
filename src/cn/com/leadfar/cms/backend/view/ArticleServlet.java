@@ -25,7 +25,7 @@ public class ArticleServlet extends BaseServlet {
 
     //在这个方法中执行查询工作
     @Override
-    protected void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //从界面中获取title参数
         String title = request.getParameter("title");
         PageVO pv = articleDao.findArticles(title);

@@ -1,7 +1,5 @@
 package cn.com.leadfar.cms.utils;
-
 import org.apache.commons.beanutils.BeanUtils;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.Iterator;
 import java.util.Map;
