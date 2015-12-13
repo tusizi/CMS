@@ -97,13 +97,13 @@ public class LoginServlet extends BaseServlet {
         //系统判断验证码是否正确
         //刚刚生成的验证码串
         String sessionCode = (String) request.getSession().getAttribute("codes");//得到的不是string类型吗
-        if (!sessionCode.equalsIgnoreCase(checkcode)) {
-            //网页重定向forward到login.jsp页面
-            //请求转发
-            request.setAttribute("error", "验证码错误");
-            request.getRequestDispatcher("/backend/login.jsp").forward(request, response);
-            return;
-        }
+//        if (!sessionCode.equalsIgnoreCase(checkcode)) {
+//            //网页重定向forward到login.jsp页面
+//            //请求转发
+//            request.setAttribute("error", "验证码错误");
+//            request.getRequestDispatcher("/backend/login.jsp").forward(request, response);
+//            return;
+//        }
 
         Admin admin = adminDao.findAdminByUsername(username);
 

@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="js/js.js"></script>
   <script type="text/javascript">
     function reloadcheckcode(img){
-      img.src = "LoginServlet?method=checkcode&"+Math.random();
+      img.src = "/backend/LoginServlet?method=checkcode&"+Math.random();
     }
     //让页面平铺在整个窗口
     if(window.parent != window){

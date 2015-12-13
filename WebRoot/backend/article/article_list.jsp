@@ -95,7 +95,7 @@ td {
     function del(){
       //判断有哪些checkedboxs框被选中
       var idCheckboxs = document.getElementsByName("id");
-      var url ="DelArticleServlet";
+      var url ="ArticleServlet?method=del";
       var checkedIds =[];
       for(var i=0;i<idCheckboxs.length;i++){
         if(idCheckboxs[i].checked){
@@ -104,11 +104,9 @@ td {
         }
       }
       for(var i=0;i<checkedIds.length;i++){
-        if(i==0){
-          url = url+"?id="+checkedIds[i];
-        }else{
+
           url = url+"&id="+checkedIds[i];
-        }
+
       }
       //通过GET方式向后台递交一个请求
       alert(url);
@@ -180,7 +178,7 @@ td {
         <td height="20" bgcolor="#FFFFFF"><div align="center">
           <input type="checkbox" name="id" value="${a.id}" />
         </div></td>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><a href="ArticleServlet?method=updateInput&id=${a.id}" title="点击查看和编辑文章">${a.title}</a></div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><a href="ArticleServlet?method=openUpdate&id=${a.id}" title="点击查看和编辑文章">${a.title}</a></div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${a.source}</div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">20</div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">5</div></td>
@@ -189,10 +187,8 @@ td {
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate value="${a.deploytime}" pattern="yyyy-MM-dd HH:mm"/></div></td>
         <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE21">
         <a href="#" title="点击发布文章">发布</a> | 
-        <a href="ArticleServlet?id=${a.id}" title="点击删除文章">删除</a>
-          <input type="hidden" name="method" value="del">|
-        <a href="ArticleServlet?id=${a.id}" title="点击编辑文章">编辑</a>
-          <input type="hidden" name="method" value="openUpdate">
+        <a href="ArticleServlet?method=del&id=${a.id}" title="点击删除文章">删除</a>
+        <a href="ArticleServlet?method=openUpdate&id=${a.id}" title="点击编辑文章">编辑</a>
         </div></td>
       </tr>
        </c:forEach>
