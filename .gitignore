@@ -1,3 +1,4 @@
 .idea/
 CMS.iml
 out/
+WebRoot/WEB-INF/classes

@@ -5,16 +5,11 @@ import cn.com.leadfar.cms.utils.PropertiesBeanFactory;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * Created by tusizi on 2015/11/17.
  */
-@WebServlet(name = "InitBeanFactoryServlet")
 public class InitBeanFactoryServlet extends HttpServlet {
     public static final String INIT_FACTORY_NAME ="_my_bean_factory";
     @Override
