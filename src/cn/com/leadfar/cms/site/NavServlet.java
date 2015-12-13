@@ -7,8 +7,6 @@ import cn.com.leadfar.cms.backend.model.Channel;
 import cn.com.leadfar.cms.backend.view.BaseServlet;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -16,7 +14,6 @@ import java.io.IOException;
 /**
  * Created by tusizi on 2015/12/10.
  */
-@WebServlet(name = "NavServlet")
 public class NavServlet extends BaseServlet {
     private ArticleDao articleDao;
     private ChannelDao channelDao;

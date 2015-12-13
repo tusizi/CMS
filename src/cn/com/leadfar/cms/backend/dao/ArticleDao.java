@@ -3,7 +3,6 @@ package cn.com.leadfar.cms.backend.dao;
 import cn.com.leadfar.cms.backend.model.Article;
 import cn.com.leadfar.cms.backend.model.Channel;
 import cn.com.leadfar.cms.backend.vo.PageVO;
-import com.sun.scenario.effect.impl.state.LinearConvolveShadowPeer;
 
 import java.util.List;
 

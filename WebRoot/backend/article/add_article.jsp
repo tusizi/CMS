@@ -150,11 +150,6 @@ fieldset div {
             <br />
         </div>
 		<div>
-			<label for="source">文章来源</label>
-			<input type="text" name="source" id="source" value="" size="30" maxlength="100" />
-			*(最多100个字符)<br />
-		</div>
-		<div>
 			<label for="content">文章内容</label>
 			<textarea rows="20" cols="100" name="content" id="content"></textarea>
 			<br />	
