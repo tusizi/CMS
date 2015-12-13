@@ -100,7 +100,7 @@ fieldset div {
 <body>
 <div id="formwrapper">
 	<h3>编辑网站文章</h3>
-	<form action="ArticleServlet" method="add">
+	<form action="ArticleServlet" method="post">
 		<input type="hidden" name="method" value="add">
 	<fieldset>
 		<legend>文章基本信息</legend>
@@ -137,8 +137,8 @@ fieldset div {
             <input type="checkbox" name="headline" id="headline" value="true"/>是否为首页头条
         </div>
         <div>
-            <label for="channelIds">所属频道</label>
-            <select name ="channelIds" id ="channelIds" multiple="multiple">
+            <label for="channels">所属频道</label>
+            <select name ="channels" id ="channels" multiple="multiple">
                 <c:forEach items="${channelIds}" var="c">
                     <option value="${c.id}">${c.name}</option>
                 </c:forEach>
@@ -150,6 +150,11 @@ fieldset div {
             <br />
         </div>
 		<div>
+			<label for="source">文章来源</label>
+			<input type="text" name="source" id="source" value="" size="30" maxlength="100" />
+			*(最多100个字符)<br />
+		</div>
+		<div>
 			<label for="content">文章内容</label>
 			<textarea rows="20" cols="100" name="content" id="content"></textarea>
 			<br />	
@@ -157,7 +162,7 @@ fieldset div {
 		<div class="enter">
 		    <input name="submit" type="submit" class="buttom" value="提交" />
 		    <input name="reset" type="reset" class="buttom" value="重置" />
-		    <input name="return" type="button" class="buttom" value="返回列表页面" onclick="window.location = 'SearchArticlesServlet'"/>
+		    <input name="return" type="button" class="buttom" value="返回列表页面" onclick="window.location = 'ArticleServlet'"/>
 		</div>
 	</fieldset>
 	</form>

@@ -20,7 +20,7 @@
     <delete id="delChannel_Articles" parameterType="int">
         delete from t_channel_article where articleId = #{articleId}
     </delete>
-    <select id="findArticleById" parameterType="int" resultType="Article">
+    <select id="findById" parameterType="int" resultType="Article">
         select * from t_article where id = #{id}
     </select>
 
@@ -29,6 +29,7 @@
         <if test="title!=null">
             where title like #{title}
         </if>
+        order by createtime desc
              limit #{offset},#{pagesize}
     </select>
 
@@ -48,6 +49,7 @@
             select * from t_article
         </otherwise>
         </choose>
+        order by createtime desc
         limit #{offset},#{pagesize}
     </select>
 
@@ -62,7 +64,7 @@
         </choose>
     </select>
 
-    <update id="updateArticle" parameterType="Article">
+    <update id="update" parameterType="Article">
         update t_article set
         title=#{title}, content=#{content}, source =#{source},
         author=#{author},keyword=#{keyword},intro=#{intro},type=#{type},
@@ -71,5 +73,11 @@
 		adminId=#{adminId}
         where id =#{id}
     </update>
+    <select id="findHeadline" parameterType="int" resultType="Article">
+        select * from t_article where headline = true order by createtime desc limit 0,#{max}
+    </select>
+    <select id="findRecommend" parameterType="int" resultType="Article">
+        select * from t_article where recommend = true order by createtime desc limit 0,#{max}
+    </select>
 </mapper>
 

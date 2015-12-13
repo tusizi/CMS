@@ -17,34 +17,8 @@ public class ChannelServlet extends BaseServlet {
     @Override
     protected void execute(HttpServletRequest request,
                            HttpServletResponse response) throws ServletException, IOException {
-
-        int offset = 0;
-        int pagesize = 5;
-
-        // ϣ���request�л��offset����
-        try {
-            offset = Integer.parseInt(request.getParameter("pager.offset"));
-        } catch (Exception ignore) {
-        }
-
-        // ����request���ݹ�����pagesize������ô����Ҫ����http session�е�pagesize��ֵ
-        if (request.getParameter("pagesize") != null) {
-            request.getSession().setAttribute("pagesize",
-                    Integer.parseInt(request.getParameter("pagesize")));
-        }
-
-        // ϣ���http session�л��pagesize��ֵ�����û�У�������ȱʡֵΪ5
-        Integer ps = (Integer) request.getSession().getAttribute("pagesize");
-        if (ps == null) {
-            request.getSession().setAttribute("pagesize", pagesize);
-        } else {
-            pagesize = ps;
-        }
-
-        PageVO pv = channelDao.findChannels(offset, pagesize);
-
+        PageVO pv = channelDao.findChannels();
         request.setAttribute("pv", pv);
-
         //forward��channel_list.jsp
         request.getRequestDispatcher("/backend/channel/channel_list.jsp").forward(request, response);
     }
@@ -67,10 +41,9 @@ public class ChannelServlet extends BaseServlet {
     //�򿪸��½���
     public void updateInput(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         //���մӽ��洫�ݹ�����ID
         String id = request.getParameter("id");
-        Channel c = channelDao.findChannelById(Integer.parseInt(id));
+        Channel c = (Channel) channelDao.findChannelById(Integer.parseInt(id));
         request.setAttribute("channel", c);
         //forward������ҳ��
         request.getRequestDispatcher("/backend/channel/update_channel.jsp").forward(request, response);

@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/backend/common/taglib.jsp"%>
@@ -181,13 +180,13 @@ td {
         <td height="20" bgcolor="#FFFFFF"><div align="center">
           <input type="checkbox" name="id" value="${a.id}" />
         </div></td>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><a href="#" title="点击查看和编辑文章">${a.title}</a></div></td>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">http://www.leadfar.org</div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><a href="ArticleServlet?method=updateInput&id=${a.id}" title="点击查看和编辑文章">${a.title}</a></div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${a.source}</div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">20</div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">5</div></td>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">2010-07-19</div></td>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">2010-07-19</div></td>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">2010-07-19</div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate value="${a.createtime}" pattern="yyyy-MM-dd HH:mm"/> </div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate value="${a.updatetime}" pattern="yyyy-MM-dd HH:mm"/></div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><fmt:formatDate value="${a.deploytime}" pattern="yyyy-MM-dd HH:mm"/></div></td>
         <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE21">
         <a href="#" title="点击发布文章">发布</a> | 
         <a href="ArticleServlet?id=${a.id}" title="点击删除文章">删除</a>

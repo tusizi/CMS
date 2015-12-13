@@ -64,6 +64,14 @@
         <url-pattern>/backend/ArticleServlet</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>ChannelServlet</servlet-name>
+        <servlet-class>cn.com.leadfar.cms.backend.view.ChannelServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChannelServlet</servlet-name>
+        <url-pattern>/backend/ChannelServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>InitBeanFactoryServlet</servlet-name>
         <servlet-class>cn.com.leadfar.cms.backend.view.InitBeanFactoryServlet</servlet-class>
         <init-param>
@@ -73,10 +81,13 @@
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet>
-        <servlet-name>InitMigrationServlet</servlet-name>
-        <servlet-class>cn.com.leadfar.cms.backend.view.InitMigrationServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
+        <servlet-name>NavServlet</servlet-name>
+        <servlet-class>cn.com.leadfar.cms.site.NavServlet</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>NavServlet</servlet-name>
+        <url-pattern>/NavServlet</url-pattern>
+    </servlet-mapping>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
