@@ -20,54 +20,8 @@
 <!-- 首页中间 -->
 <div id="mid">
 	<!-- 首页左边 -->
-	<div id="left" style="text-align:left">
-		首页 -&gt; JBPM
-		<hr>
+	<jsp:include page="NavServlet?method=channelIndex"></jsp:include>
 <!-- 文章标题及简介 -->
-<div class="h2title">如何在JBPM的Action中访问Spring中的JavaBean</div>
-<div CLASS="atime">
-作者：Kenny Lee
-| 来源：http://www.topxp.org
-| 08-8-28 18:11:03.000
-</div>
-如果你希望在Jbpm的Action中，访问到spring中的bean，那么在集成了spring-modules中对JBPM的支持之后，这将很容易做到。
-<br/>
-<a href="article.jsp">【阅读全文】</a>
-
-<!-- 文章标题及简介 -->
-<div class="h2title">如何在JBPM的Action中访问Spring中的JavaBean</div>
-<div CLASS="atime">
-作者：Kenny Lee
-| 来源：http://www.topxp.org
-| 08-8-28 18:11:03.000
-</div>
-如果你希望在Jbpm的Action中，访问到spring中的bean，那么在集成了spring-modules中对JBPM的支持之后，这将很容易做到。
-<br/>
-<a href="ac_402881e51c08bbbd011c08cb76140001.html">【阅读全文】</a>
-
-<!-- 文章标题及简介 -->
-<div class="h2title">如何在JBPM的Action中访问Spring中的JavaBean</div>
-<div CLASS="atime">
-作者：Kenny Lee
-| 来源：http://www.topxp.org
-| 08-8-28 18:11:03.000
-</div>
-如果你希望在Jbpm的Action中，访问到spring中的bean，那么在集成了spring-modules中对JBPM的支持之后，这将很容易做到。
-<br/>
-<a href="ac_402881e51c08bbbd011c08cb76140001.html">【阅读全文】</a>
-
-<!-- 文章标题及简介 -->
-<div class="h2title">如何在JBPM的Action中访问Spring中的JavaBean</div>
-<div CLASS="atime">
-作者：Kenny Lee
-| 来源：http://www.topxp.org
-| 08-8-28 18:11:03.000
-</div>
-如果你希望在Jbpm的Action中，访问到spring中的bean，那么在集成了spring-modules中对JBPM的支持之后，这将很容易做到。
-<br/>
-<a href="ac_402881e51c08bbbd011c08cb76140001.html">【阅读全文】</a>
-	
-	</div>
 	<!-- 首页右边 -->
 	<div class="right">
 		<div class="right_topic_1">

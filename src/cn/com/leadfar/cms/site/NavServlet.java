@@ -3,6 +3,7 @@ package cn.com.leadfar.cms.site;
 import cn.com.leadfar.cms.SystemContext;
 import cn.com.leadfar.cms.backend.dao.ArticleDao;
 import cn.com.leadfar.cms.backend.dao.ChannelDao;
+import cn.com.leadfar.cms.backend.model.Article;
 import cn.com.leadfar.cms.backend.model.Channel;
 import cn.com.leadfar.cms.backend.view.BaseServlet;
 
@@ -62,6 +63,26 @@ public class NavServlet extends BaseServlet {
         SystemContext.setPagesize(Integer.MAX_VALUE);
         request.setAttribute("channels",channelDao.findChannels().getDatas());
         request.getRequestDispatcher("/portlet/channel_list.jsp").include(request,response);
+    }
+    //查询某个频道下所有文章，并分页显示
+    public void channelIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String channelId = request.getParameter("channelId");
+        Channel c= null;
+        if (channelId!=null){
+           c=(Channel)channelDao.findChannelById(Integer.parseInt(channelId));
+            request.setAttribute("channel",c);
+        }
+        //查询最新发表的文章
+        request.setAttribute("pageVO",articleDao.findArticles(c));
+        request.getRequestDispatcher("/portlet/channel_index.jsp").include(request, response);
+    }
+    //根据id查询文章
+    public void articleDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String articleId = request.getParameter("articleId");
+        Article a= new Article();
+        request.setAttribute("article",a = articleDao.findArticleById(Integer.parseInt(articleId)));
+        //????System.out.println(a.getChannels() );
+        request.getRequestDispatcher("/portlet/article_detail.jsp").include(request, response);
     }
 
     public void setArticleDao(ArticleDao articleDao) {

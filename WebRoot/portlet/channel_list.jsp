@@ -8,7 +8,7 @@
 	<div id="menu">
 		<a href="index.jsp">首页</a>
 		<c:forEach items="${channels}" var="c">
-			<a href="channel.jsp&channelId=${c.id}">${c.name}</a>
+			<a href="channel.jsp?channelId=${c.id}">${c.name}</a>
 		</c:forEach>
 	</div>
 </div>
