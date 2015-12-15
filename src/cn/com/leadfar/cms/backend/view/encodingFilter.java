@@ -1,7 +1,6 @@
 package cn.com.leadfar.cms.backend.view;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -9,7 +8,6 @@ import java.io.IOException;
 /**
  * Created by tusizi on 2015/11/12.
  */
-@WebFilter(filterName = "encodingFilter")
 public class encodingFilter implements Filter {
     private String encoding;
     public void destroy() {

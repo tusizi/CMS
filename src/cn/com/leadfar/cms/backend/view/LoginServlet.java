@@ -7,7 +7,6 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
@@ -19,7 +18,7 @@ import java.util.Random;
 /**
  * Created by tusizi on 2015/10/20.
  */
-@WebServlet(name = "LoginServlet")
+
 public class LoginServlet extends BaseServlet {
     private AdminDao adminDao;
     private int width;
@@ -98,13 +97,13 @@ public class LoginServlet extends BaseServlet {
         //系统判断验证码是否正确
         //刚刚生成的验证码串
         String sessionCode = (String) request.getSession().getAttribute("codes");//得到的不是string类型吗
-        if (!sessionCode.equalsIgnoreCase(checkcode)) {
-            //网页重定向forward到login.jsp页面
-            //请求转发
-            request.setAttribute("error", "验证码错误");
-            request.getRequestDispatcher("/backend/login.jsp").forward(request, response);
-            return;
-        }
+//        if (!sessionCode.equalsIgnoreCase(checkcode)) {
+//            //网页重定向forward到login.jsp页面
+//            //请求转发
+//            request.setAttribute("error", "验证码错误");
+//            request.getRequestDispatcher("/backend/login.jsp").forward(request, response);
+//            return;
+//        }
 
         Admin admin = adminDao.findAdminByUsername(username);
 

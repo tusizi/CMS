@@ -69,7 +69,8 @@ public class ArticleDaoForMyBatis extends BaseDao implements ArticleDao {
     @Override
     public PageVO findArticles(String title) {
         Map params = new HashMap();
-        params.put("title", "%" + title + "%");
+        if(title != null)
+            params.put("title", "%" + title + "%");
         return findPaginated(Article.class.getName() + ".findArticlesByTitle",params);
     }
 

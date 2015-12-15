@@ -7,17 +7,12 @@ import org.apache.commons.beanutils.ConvertUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Set;
 
 /**
  * Created by tusizi on 2015/11/17.
  */
-@WebServlet(name = "InitBeanFactoryServlet")
 public class InitBeanFactoryServlet extends HttpServlet {
     public static final String INIT_FACTORY_NAME ="_my_bean_factory";
     @Override
@@ -31,6 +26,6 @@ public class InitBeanFactoryServlet extends HttpServlet {
         }
         config.getServletContext().setAttribute(INIT_FACTORY_NAME,factory);
         //初始化BeanUtils的转换器
-        ConvertUtils.register(new ChannelsSetConverter(),Set.class);
+        ConvertUtils.register(new ChannelsSetConverter(), Set.class);
     }
 }
