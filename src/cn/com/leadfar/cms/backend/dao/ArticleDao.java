@@ -15,7 +15,7 @@ public interface ArticleDao {
     public Article findArticleById(int id);
     public PageVO findArticles(String title);
     public PageVO findArticles(Channel channel);
-
+    public PageVO findArticlesByKeyword(String keyword);
     //查询最新文章
     public List findArticles(Channel channel, int max);
     public List findHeadline(int max);

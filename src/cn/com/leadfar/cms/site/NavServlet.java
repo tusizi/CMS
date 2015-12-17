@@ -6,6 +6,7 @@ import cn.com.leadfar.cms.backend.dao.ChannelDao;
 import cn.com.leadfar.cms.backend.model.Article;
 import cn.com.leadfar.cms.backend.model.Channel;
 import cn.com.leadfar.cms.backend.view.BaseServlet;
+import cn.com.leadfar.cms.backend.vo.PageVO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -83,6 +84,14 @@ public class NavServlet extends BaseServlet {
         request.setAttribute("article",a = articleDao.findArticleById(Integer.parseInt(articleId)));
         //????System.out.println(a.getChannels() );
         request.getRequestDispatcher("/portlet/article_detail.jsp").include(request, response);
+    }
+    //根据keywords查询相关文章
+    public void keywords(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String articleId = request.getParameter("articleId");
+        Article a = articleDao.findArticleById(Integer.parseInt(articleId));
+        PageVO pageVO=articleDao.findArticlesByKeyword(a.getKeyword());
+        request.setAttribute("keyArticle",pageVO.getDatas());
+        request.getRequestDispatcher("/portlet/keywords.jsp").include(request, response);
     }
 
     public void setArticleDao(ArticleDao articleDao) {

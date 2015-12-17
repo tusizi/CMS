@@ -12,6 +12,9 @@
     <insert id="insert_channel_article" parameterType="map">
        insert into t_channel_article(channelId,articleId) values(#{c.id},#{a.id})
     </insert>
+    <insert id="insert_article_keyword" parameterType="map">
+        insert into t_article_keyword(keyword,articleId) values(#{kw},#{a.id})
+    </insert>
 
     <delete id="delArticles" parameterType="int">
         delete from t_article where id = #{id}
@@ -19,6 +22,9 @@
 
     <delete id="delChannel_Articles" parameterType="int">
         delete from t_channel_article where articleId = #{articleId}
+    </delete>
+    <delete id="delKeyword_Article" parameterType="int">
+        delete from t_article_keyword where articleId = #{articleId}
     </delete>
     <select id="findById" parameterType="int" resultType="Article">
         select * from t_article where id = #{id}
@@ -62,6 +68,13 @@
                 select count(*) from t_article
             </otherwise>
         </choose>
+    </select>
+
+    <select id="findArticleIdByKeyword" parameterType="map" resultType="int">
+        select distinct articleId from t_article_keyword where keyword in (${keywords})
+    </select>
+    <select id="findArticlesByIds" parameterType="map" resultType="Article">
+        select  * from t_article where id in (${ids}) limit #{offset},#{pagesize}
     </select>
 
     <update id="update" parameterType="Article">

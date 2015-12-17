@@ -8,6 +8,7 @@ import cn.com.leadfar.cms.backend.vo.PageVO;
 import cn.com.leadfar.cms.utils.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 
+import java.awt.datatransfer.StringSelection;
 import java.util.*;
 
 /**
@@ -30,6 +31,16 @@ public class ArticleDaoForMyBatis extends BaseDao implements ArticleDao {
                     param.put("c", c);
                     session.insert(Article.class.getName() + ".insert_channel_article", param);
                 }
+                //插入文章和关键字的关联
+               if(a.getKeyword()!=null&& !a.getKeyword().trim().equals("")){
+                   String[] keywords = a.getKeyword().split(",| ");
+                   for (String kw:keywords){
+                       Map param =new HashMap();
+                       param.put("kw",kw);
+                       param.put("a",a);
+                       session.insert(Article.class.getName()+".insert_article_keyword",param);
+                   }
+               }
                 //提交
                 session.commit();
             }
@@ -49,6 +60,7 @@ public class ArticleDaoForMyBatis extends BaseDao implements ArticleDao {
             for (String id : ids) {
                 session.delete(Article.class.getName() + ".delArticles", Integer.parseInt(id));
                 session.delete(Article.class.getName() + ".delChannel_Articles", Integer.parseInt(id));
+                session.delete(Article.class.getName() + ".delKeyword_Article", Integer.parseInt(id));
             }
             session.commit();
         } catch (Exception e) {
@@ -149,5 +161,58 @@ public class ArticleDaoForMyBatis extends BaseDao implements ArticleDao {
             //关闭
             session.close();
         }
+    }
+
+    //根据关键字查询相关文章
+    /**
+     * 查询相关文章的时候，首先根据文章的关键字，查出所有相关文章的ID，然后根据ID列表查出文章的标题来
+     * @param keyword
+     * @return
+     */
+    @Override
+    public PageVO findArticlesByKeyword(String keyword) {
+        SqlSession session = MyBatisUtil.getSession();
+        try {
+            if (keyword == null || keyword.trim().equals("")){
+                return null;
+            }
+            String[] keywords = keyword.split(",| ");//按照空格或者逗号隔开
+            //先找出相关文章的id列表
+            if (keywords!=null&&keywords.length>0){
+                StringBuffer sb = new StringBuffer();
+                for (int i =0;i<keywords.length;i++){
+                    if (i!=0){
+                        sb.append(",");
+                    }
+                    sb.append("'"+keywords[i]+"'");
+                }
+                Map params = new HashMap();
+                params.put("keywords",sb.toString());
+                List articleId = session.selectList(Article.class.getName()+".findArticleIdByKeyword",params);
+
+                StringBuffer ids= new StringBuffer();
+                for (int i=0;i<articleId.size();i++){
+                    if (i!=0){
+                        ids.append(",");
+                    }
+                    ids.append("'"+articleId.get(i)+"'");
+                }
+                params = new HashMap();
+                params.put("ids",ids.toString());
+                params.put("offset",0);
+                params.put("pagesize",Integer.MAX_VALUE);
+                List articles = session.selectList(Article.class.getName()+".findArticlesByIds",params);
+                PageVO pageVO=new PageVO();
+                pageVO.setDatas(articles);
+                pageVO.setTotal(articleId.size());
+                return pageVO;
+            }
+            }catch (Exception e) {
+            e.printStackTrace();
+            session.rollback();
+        } finally{
+            session.close();
+        }
+        return null;
     }
 }

@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="style/main.css">
-<title>如何在JBPM的Action中访问Spring中的JavaBean</title>
+<title>${cms:article(pageContext,param.articleId).title}</title>
 </head>
 <body>
 <!-- 网站的logo，其它背景，首页横幅广告等等 -->
@@ -37,19 +37,8 @@
 			</form>
 		</div>
 	</div>
-	
-	<div class="right" >
-		<div class="right_topic_1">
-			相关文章
-		</div>
-		<div class="right_topic_2">
-			<a href="#"><img src="images/more_red.gif" style="float:right;margin-top:10px;border:0px"></a>
-		</div>
-		<div class="right_topic_3">
-			· <a href="#">概念模型 - 读《分析模式》之一</a>
-		</div>	
-	</div>
-	
+	<%--相关文章--%>
+	<jsp:include page="NavServlet?method=keywords"/>
 	<div style="clear:both"></div>
 </div>
 <!-- 首页下部，版权信息等等 -->
