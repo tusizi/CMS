@@ -6,7 +6,7 @@
     <insert id="add" parameterType="Admin">
         insert into t_admin (username,password) values (#{username},#{password})
     </insert>
-    <select id="findAdminById" parameterType="String" resultType="Admin">
+    <select id="findAdminByUsername" parameterType="String" resultType="Admin">
         select * from t_admin where username = #{username}
     </select>
 </mapper>

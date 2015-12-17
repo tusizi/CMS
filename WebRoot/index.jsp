@@ -30,7 +30,7 @@
 	<jsp:include page="NavServlet?method=indexChannelArticleList&channelId=4"/>
 	</div>
 	<!-- 首页右边 -->
-	<jsp:include page="/portlet/login_form.jsp"/>
+	<jsp:include page="/portlet/login_form.jsp"></jsp:include>
 	<div class="right">
 		<div class="right_topic_1">
 			本站搜索

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.leadfar.cms.backend.model.Member">
+    <insert id="add" parameterType="Member">
+        insert into t_member (nickname,password) values (#{nickname},#{password})
+    </insert>
+    <select id="findMemberByNickname" parameterType="String" resultType="Member">
+        select * from t_member where nickname = #{nickname}
+    </select>
+</mapper>
+
