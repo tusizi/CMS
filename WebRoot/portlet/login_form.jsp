@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/backend/common/taglib.jsp" %>
-<%@ taglib prefix="c" uri ="http://java.sun.com/jstl/core"%>
   <script type="text/javascript">
     function reloadcheckcode(img){
       img.src = "/backend/LoginServlet?method=checkcode&"+Math.random();
@@ -17,14 +16,14 @@
     <c:if test="${LOGIN_MEMBER !=null}">
       会员信息
     </c:if>
-    <c:if test="${LOGIN_MEMBER ==NULL}">
+    <c:if test="${LOGIN_MEMBER ==null}">
       会员登录
     </c:if>
   </div>
   <div class="right_topic_2">
   </div>
   <div class="right_topic_3">
-    <c:if test="${LOGIN_MEMBER}==null">
+    <c:if test="${LOGIN_MEMBER==null}">
       <form action="MemberLoginServlet" method="post">
         &nbsp;
         账号：<input type="text" style="width:100px" name="nickname"> <br/>
@@ -36,7 +35,7 @@
       </form>
     </c:if>
     <c:if test="${LOGIN_MEMBER !=null}">
-      &nbsp;欢迎 ${LOGIN_MEMBER.name } 来到领航致远JAVA联盟 <br/>
+      &nbsp;欢迎 ${LOGIN_MEMBER.nickname } 来到领航致远JAVA联盟 <br/>
       <a href="MemberServlet">个人控制台</a>
       <a href="MemberLoginServlet?method=quit">退出登录</a>
     </c:if>

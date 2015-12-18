@@ -1,9 +1,9 @@
 package cn.com.leadfar.cms.site;
 
-import cn.com.leadfar.cms.backend.dao.AdminDao;
+import cn.com.leadfar.cms.backend.dao.impl.BaseDao;
 import cn.com.leadfar.cms.backend.dao.impl.MemberDao;
-import cn.com.leadfar.cms.backend.model.Admin;
 import cn.com.leadfar.cms.backend.model.Member;
+import cn.com.leadfar.cms.backend.view.BaseServlet;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
@@ -23,7 +23,7 @@ import java.util.Random;
  * Created by tusizi on 2015/12/17.
  */
 @WebServlet(name = "MemberLoginServlet")
-public class MemberLoginServlet extends HttpServlet {
+public class MemberLoginServlet extends BaseServlet {
     private MemberDao memberDao;
     private int width;
     private int height;
@@ -94,7 +94,7 @@ public class MemberLoginServlet extends HttpServlet {
 
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //super.doPost(request, response);
-        System.out.println("admin logins");
+        System.out.println("member logins");
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         String checkcode = request.getParameter("checkcode");
@@ -112,7 +112,7 @@ public class MemberLoginServlet extends HttpServlet {
         Member member = memberDao.findMemberByNickname(nickname);
 
         //系统判断用户名是否存在
-        if (nickname != null) {
+        if (member != null) {
             String pass = member.getPassword();
             //密码是否正确
             if (!password.equals(pass)) {

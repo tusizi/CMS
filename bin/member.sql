@@ -4,7 +4,7 @@ create table t_member(
 id integer not null auto_increment,
 name varchar(200),
 email varchar(50),
-nickName VARCHAR (50),
+nickname VARCHAR (50),
 password VARCHAR (20),
 qq VARCHAR (20),
 phone VARCHAR (20),
@@ -12,3 +12,4 @@ address VARCHAR (255),
 description longtext,
 PRIMARY KEY (id)
 );
+insert into t_member(nickName,password) values('nike','nick');
