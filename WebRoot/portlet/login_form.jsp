@@ -9,6 +9,9 @@
     if(window.parent != window){
       window.parent.location = window.location;
     }
+    function reg(){
+      window.location="MemberServlet?method=regInput";
+    }
   </script>
 
 <div class="right">
@@ -31,6 +34,7 @@
         密码：<input type="password" style="width:100px" name="password"> <br/>
         <img src="MemberLoginServlet?method=checkcode" id="safecode" onclick="reloadcheckcode(this)" title="如果看不清，请点击本图片换一张"/>
         <br/>
+        &nbsp;<input type="submit" value="注册会员" onclick="reg();">
         &nbsp;<input type="submit" value="登录"> <br/>
       </form>
     </c:if>
