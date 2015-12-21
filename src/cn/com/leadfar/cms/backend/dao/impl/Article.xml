@@ -77,7 +77,7 @@
         select distinct articleId from t_article_keyword where keyword in (${keywords})
     </select>
     <select id="findArticlesByIds" parameterType="map" resultType="Article">
-        select  * from t_article where id in (${ids}) limit #{offset},#{pagesize}
+        select * from t_article where id in (${ids}) limit #{offset},#{pagesize}
     </select>
 
     <update id="update" parameterType="Article">

@@ -40,7 +40,7 @@
     </c:if>
     <c:if test="${LOGIN_MEMBER !=null}">
       &nbsp;欢迎 ${LOGIN_MEMBER.nickname } 来到领航致远JAVA联盟 <br/>
-      <a href="MemberServlet">个人控制台</a>
+      <a href="MemberServlet?loginMemberId=${LOGIN_MEMBER.id}">个人控制台</a>
       <a href="MemberLoginServlet?method=quit">退出登录</a>
     </c:if>
 

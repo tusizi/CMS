@@ -113,6 +113,15 @@
         <url-pattern>/MemberLoginServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>MemberServlet</servlet-name>
+        <servlet-class>cn.com.leadfar.cms.site.MemberServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MemberServlet</servlet-name>
+        <url-pattern>/MemberServlet</url-pattern>
+    </servlet-mapping>
+
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

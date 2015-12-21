@@ -108,6 +108,7 @@
     <div id="formwrapper">
       <form action="MemberServlet" method="post" onsubmit="return validate(this);">
         <input type="hidden" name="method" value="reg">
+        <input type="hidden" name="method" value="reg">
         <fieldset>
           <div>
             <label for="name">姓名</label>
@@ -155,7 +156,7 @@
   </div>
   <!-- 首页右边 -->
   <jsp:include page="/portlet/login_form.jsp"></jsp:include>
-  <%@include file="/portlet/search_form.jsp" %>
+  <%@include file="/portlet/search_from.jsp" %>
   <div style="clear:both"></div>
 </div>
 <!-- 首页下部，版权信息等等 -->
