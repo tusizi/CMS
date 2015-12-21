@@ -11,7 +11,8 @@
 			<a href="#"><img src="images/more_red.gif" style="float:right;margin-top:10px;border:0px"></a>
 		</div>
 		<div class="right_topic_3">
-			<c:forEach items="keyArticle" var="a">
+			<c:forEach items="${keyArticle}" var="a">
+				· <a href="#">${a.title}</a><br/>
 			</c:forEach>
 		</div>
 	</div>

@@ -9,4 +9,7 @@ import cn.com.leadfar.cms.backend.model.Member;
 public interface MemberDao {
     public void addMember(Member member);
     public Member findMemberByNickname(String nickname);
+    public Object findMemberById(int id);
+    public void updateMember(Member member);
+    public void updateMemberPassword(int id,String oldPassword,String newPassword );
 }

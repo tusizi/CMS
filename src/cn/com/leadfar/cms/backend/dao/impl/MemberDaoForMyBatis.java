@@ -31,4 +31,35 @@ public class MemberDaoForMyBatis extends BaseDao implements MemberDao {
         }
         return member;
     }
+
+    @Override
+    public Member findMemberById(int id) {
+       return (Member) findById(Member.class,id);
+    }
+
+    @Override
+    public void updateMember(Member member) {
+        update(member);
+    }
+
+    @Override
+    public void updateMemberPassword(int id, String oldPassword, String newPassword) {
+        SqlSession session = MyBatisUtil.getSession();
+        try {
+            Member member = (Member) session.selectOne(Member.class.getName() + ".findById", id);
+            if (oldPassword.equals(member.getPassword())){
+                member.setPassword(newPassword);
+                session.update(Member.class.getName()+".updatePassword",member);
+            }else {
+                throw new RuntimeException("新密码与旧密码不匹配");
+            }
+            session.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            session.rollback();
+            throw new RuntimeException(e.getMessage(),e); //ÖØÐÂÅ×³öÒì³££¬ÒÔ±ã¿Í»§¶Ë¿ÉÒÔ´¦Àí´ËÒì³££¬¸øÓÃ»§ÌáÊ¾ÐÅÏ¢
+        } finally{
+            session.close();
+        }
+    }
 }
