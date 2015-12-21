@@ -9,6 +9,7 @@ source admin.sql;
 source article.sql;
 source channel.sql;
 source channel_article.sql;
+source article_keyword.sql;
 source comment.sql;
 source member.sql;
 source topic.sql;

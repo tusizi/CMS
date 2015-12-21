@@ -91,7 +91,7 @@ public class NavServlet extends BaseServlet {
         Article a = articleDao.findArticleById(Integer.parseInt(articleId));
         PageVO pageVO=articleDao.findArticlesByKeyword(a.getKeyword());
         request.setAttribute("keyArticle",pageVO.getDatas());
-        request.getRequestDispatcher("/portlet/keywords.jsp").include(request, response);
+        request.getRequestDispatcher("/portlet/keyword.jsp").include(request, response);
     }
 
     public void setArticleDao(ArticleDao articleDao) {

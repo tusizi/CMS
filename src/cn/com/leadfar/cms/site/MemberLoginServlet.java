@@ -9,8 +9,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
@@ -22,7 +21,6 @@ import java.util.Random;
 /**
  * Created by tusizi on 2015/12/17.
  */
-@WebServlet(name = "MemberLoginServlet")
 public class MemberLoginServlet extends BaseServlet {
     private MemberDao memberDao;
     private int width;

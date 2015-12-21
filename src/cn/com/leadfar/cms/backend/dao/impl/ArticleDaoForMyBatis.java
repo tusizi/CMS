@@ -75,7 +75,11 @@ public class ArticleDaoForMyBatis extends BaseDao implements ArticleDao {
 
     @Override
     public Article findArticleById(int id) {
-        return (Article)findById(Article.class,id);
+        Article article = (Article) findById(Article.class, id);
+        SqlSession session= MyBatisUtil.getSession();
+        List channels=session.selectList(Article.class.getName() + ".findChannelsById", id);
+        article.setChannels(new HashSet<Channel>(channels));
+        return article;
     }
 
     @Override

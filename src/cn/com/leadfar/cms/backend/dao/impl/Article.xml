@@ -69,6 +69,9 @@
             </otherwise>
         </choose>
     </select>
+    <select id="findChannelsById" parameterType="int" resultType="Channel">
+        select * from t_channel where id in (select channelId from t_channel_article where articleId=#{id})
+    </select>
 
     <select id="findArticleIdByKeyword" parameterType="map" resultType="int">
         select distinct articleId from t_article_keyword where keyword in (${keywords})
