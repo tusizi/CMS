@@ -89,11 +89,20 @@
 		adminId=#{adminId}
         where id =#{id}
     </update>
+
+    <update id="updateLeaveNumber" parameterType="Article">
+        update t_article set
+        leaveNumbet=#{leaveNumber}
+        where id =#{id}
+    </update>
     <select id="findHeadline" parameterType="int" resultType="Article">
         select * from t_article where headline = true order by createtime desc limit 0,#{max}
     </select>
     <select id="findRecommend" parameterType="int" resultType="Article">
         select * from t_article where recommend = true order by createtime desc limit 0,#{max}
+    </select>
+    <select id="selectLeaveNumber" parameterType="int" resultType="int">
+        select leaveNumber from t_article where id=#{articleId}
     </select>
 </mapper>
 

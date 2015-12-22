@@ -18,4 +18,5 @@
 | <fmt:formatDate value="${article.createtime}" pattern="yyyy-MM-dd HH:mm"/>
 </div>
 ${article.content}
+		<jsp:include page="/CommonServlet?mehtod=comments"></jsp:include>
 	</div>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.leadfar.cms.backend.model.Comment">
+    <select id="findByArticleId" parameterType="int" resultType="Comment">
+        select * from t_comment where articleId = #{articleId}
+    </select>
+    <insert id="add" parameterType="Comment">
+        insert into t_comment (name,email,site,content,commentTime,articleId,memberId)
+		values
+		(#{name},#{email},#{site},#{content},#{commentTime},#{articleId},#{memberId})
+    </insert>
+    <select id="findAllComments" parameterType="map" resultType="Comment">
+        select * from t_comment
+        limit #{offset},#{pagesize}
+    </select>
+    <select id="findById" parameterType="int" resultType="Comment">
+        select * from t_comment where id = #{id}
+    </select>
+    <delete id=".del" parameterType="int">
+        delect from t_comment where id =#{id}
+    </delete>
+</mapper>
+

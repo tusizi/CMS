@@ -122,6 +122,24 @@
         <url-pattern>/MemberServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CommonServlet</servlet-name>
+        <servlet-class>cn.com.leadfar.cms.site.CommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommonServlet</servlet-name>
+        <url-pattern>/CommonServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MemberAdminServlet</servlet-name>
+        <servlet-class>cn.com.leadfar.cms.backend.view.MemberAdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MemberAdminServlet</servlet-name>
+        <url-pattern>/MemberAdminServlet</url-pattern>
+    </servlet-mapping>
+
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
