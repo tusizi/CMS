@@ -1,10 +1,13 @@
 package cn.com.leadfar.cms.backend.dao.impl;
 
-import cn.com.leadfar.cms.backend.dao.AdminDao;
-import cn.com.leadfar.cms.backend.model.Admin;
+import cn.com.leadfar.cms.backend.dao.MemberDao;
 import cn.com.leadfar.cms.backend.model.Member;
+import cn.com.leadfar.cms.backend.vo.PageVO;
 import cn.com.leadfar.cms.utils.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by tusizi on 2015/12/1.
@@ -61,5 +64,15 @@ public class MemberDaoForMyBatis extends BaseDao implements MemberDao {
         } finally{
             session.close();
         }
+    }
+    @Override
+    public PageVO findAllMembers() {
+        Map params = new HashMap();
+        return findPaginated(Member.class.getName()+".findAllMembers",params);
+    }
+
+    @Override
+    public void delMembers(String[] ids) {
+        del(Member.class,ids);
     }
 }

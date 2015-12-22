@@ -1,8 +1,9 @@
 package cn.com.leadfar.cms.site;
 
-import cn.com.leadfar.cms.backend.dao.impl.MemberDao;
+import cn.com.leadfar.cms.backend.dao.MemberDao;
 import cn.com.leadfar.cms.backend.model.Member;
 import cn.com.leadfar.cms.backend.view.BaseServlet;
+import cn.com.leadfar.cms.backend.vo.PageVO;
 import cn.com.leadfar.cms.utils.RequestUtil;
 
 import javax.servlet.ServletException;
