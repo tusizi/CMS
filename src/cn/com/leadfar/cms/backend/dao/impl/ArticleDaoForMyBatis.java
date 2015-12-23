@@ -219,4 +219,24 @@ public class ArticleDaoForMyBatis extends BaseDao implements ArticleDao {
         }
         return null;
     }
+    //更新文章点击量
+    @Override
+    public int updateClickNumber(int articleId) {
+        SqlSession session= MyBatisUtil.getSession();
+        int clickNumber = 0;
+        try{
+            clickNumber = (Integer)session.selectOne(Article.class.getName()+".selectClickNumber",articleId);
+            clickNumber=clickNumber+1;
+            Article a = new Article();
+            a.setId(articleId);
+            a.setClickNumber(clickNumber);
+            session.update(Article.class.getName()+".updateClickNumber",a);
+            session.commit();
+    }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return clickNumber;
+    }
 }

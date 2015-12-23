@@ -21,4 +21,5 @@ public interface ArticleDao {
     public List findHeadline(int max);
     public List findRecommend(int max);
     public void updateArticle(Article a);
+    public int updateClickNumber(int articleId);
 }

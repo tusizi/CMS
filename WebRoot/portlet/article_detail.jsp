@@ -15,6 +15,7 @@
 <div CLASS="atime">
 作者：${article.author}
 | 来源：${article.source}
+	| 阅读：<script type="text/javascript" src="NavServlet?method=click&articleId=${param.articleId}"></script>
 | <fmt:formatDate value="${article.createtime}" pattern="yyyy-MM-dd HH:mm"/>
 </div>
 ${article.content}

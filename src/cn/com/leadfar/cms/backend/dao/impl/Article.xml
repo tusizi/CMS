@@ -92,7 +92,12 @@
 
     <update id="updateLeaveNumber" parameterType="Article">
         update t_article set
-        leaveNumbet=#{leaveNumber}
+        leaveNumber=#{leaveNumber}
+        where id =#{id}
+    </update>
+    <update id="updateClickNumber" parameterType="Article">
+        update t_article set
+        clickNumber=#{clickNumber}
         where id =#{id}
     </update>
     <select id="findHeadline" parameterType="int" resultType="Article">
@@ -103,6 +108,9 @@
     </select>
     <select id="selectLeaveNumber" parameterType="int" resultType="int">
         select leaveNumber from t_article where id=#{articleId}
+    </select>
+    <select id="selectClickNumber" parameterType="int" resultType="int">
+        select clickNumber from t_article where id=#{articleId}
     </select>
 </mapper>
 

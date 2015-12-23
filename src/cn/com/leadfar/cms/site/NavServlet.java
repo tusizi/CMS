@@ -12,6 +12,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by tusizi on 2015/12/10.
@@ -92,6 +96,47 @@ public class NavServlet extends BaseServlet {
         PageVO pageVO=articleDao.findArticlesByKeyword(a.getKeyword());
         request.setAttribute("keyArticle",pageVO.getDatas());
         request.getRequestDispatcher("/portlet/keyword.jsp").include(request, response);
+    }
+    //文章点击量计算
+    public void click(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int articleId = Integer.parseInt(request.getParameter("articleId"));
+        //首先从servletContext中取出一个map
+        Map visitors= (Map) getServletContext().getAttribute("visitors");
+        if (visitors==null){
+            visitors = new ConcurrentHashMap();//啥意思？
+            getServletContext().setAttribute("visitors",visitors);
+        }
+        //得到客户端的IP地址
+        String clickIp = request.getRemoteAddr();
+        String key = articleId+"_"+clickIp;//以文章ID和客户端IP作为key
+        Date lastVisitTime = (Date) visitors.get(key);
+        Article a = articleDao.findArticleById(articleId);
+        int clickNumber = a.getClickNumber();//旧的点击量
+        if (lastVisitTime==null||!withinOneHour(lastVisitTime)){
+             clickNumber = articleDao.updateClickNumber(articleId);
+            visitors.put(key,new Date());
+        }
+        //表示返回去的是一段javascript代码
+        response.setContentType("text/javascript");
+        //返回的内容是....相当于引入了一个js文件
+        response.getWriter().println("document.write('"+clickNumber+"')");
+    }
+    /**
+     * 没有访问记录，或者在一个小时之内没有访问需要再次记录访问量
+     * 否则无需再次记录访问量
+     * 是否是在一个小时内
+     */
+    public boolean withinOneHour(Date lastVisitTime){
+        //获得现在的时间
+        Calendar now = Calendar.getInstance();
+        //获得上次访问的时间
+        Calendar last = Calendar.getInstance();
+        last.setTime(lastVisitTime);
+        last.add(Calendar.HOUR_OF_DAY,1);
+        if (last.before(now)){
+            return false;
+        }
+        return true;
     }
 
     public void setArticleDao(ArticleDao articleDao) {
