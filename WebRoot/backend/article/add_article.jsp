@@ -96,8 +96,19 @@ fieldset div {
 
 -->
 </style>
+	<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+	<script type="text/javascript">
+		function initCkeditor(){
+			CKEDITOR.replace('content',
+			{
+				skin:'office2003'
+			}
+			);
+		}
+	</script>
+
 </head>
-<body>
+<body onload="initCkeditor()">
 <div id="formwrapper">
 	<h3>编辑网站文章</h3>
 	<form action="ArticleServlet" method="post">

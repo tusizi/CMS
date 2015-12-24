@@ -30,6 +30,18 @@ a img {
 }
 -->
 </style>
+  <script type="text/javascript">
+    function openClose(){
+      var  open = true;
+      if(open){
+        window.parent.mainFrame.document.getElementById("leftMenu").width=1;
+        open=false;
+      }else{
+        window.parent.mainFrame.document.getElementById("leftMenu").width=147;
+        open=true;
+      }
+    }
+  </script>
 </head>
 <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -87,7 +99,7 @@ a img {
     <td height="30" background="images/main_31.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="8" height="30"><img src="images/main_28.gif" width="8" height="30" /></td>
-        <td width="147" background="images/main_29.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <td width="147" background="images/main_29.gif" onclick="openClose()" style="cursor: pointer;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td width="24%">&nbsp;</td>
             <td width="43%" height="20" valign="bottom" class="STYLE1">管理菜单</td>
