@@ -4,7 +4,7 @@ import cn.com.leadfar.cms.SystemContext;
 import cn.com.leadfar.cms.backend.dao.ArticleDao;
 import cn.com.leadfar.cms.backend.dao.ChannelDao;
 import cn.com.leadfar.cms.backend.model.Article;
-import cn.com.leadfar.cms.backend.model.Channel;
+import cn.com.leadfar.cms.backend.model.Attachment;
 import cn.com.leadfar.cms.backend.vo.PageVO;
 import cn.com.leadfar.cms.utils.RequestUtil;
 
@@ -12,9 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by tusizi on 2015/11/18.
@@ -38,6 +35,14 @@ public class ArticleServlet extends BaseServlet {
     public void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("add");
         Article a = (Article)RequestUtil.copyParam(Article.class, request);
+        //拿到文件的相关信息????????
+        Attachment[] attachments=(Attachment[])request.getParameterMap().get("attachs");
+        if(attachments!=null){
+            for (Attachment atta:attachments){
+                System.out.println(atta.getName()+"文件已经上传,类型是"+atta.getContentType());
+            }
+        }
+
         System.out.println("addArticle");
         articleDao.addArticle(a);
         request.getRequestDispatcher("/backend/article/add_article_success.jsp").forward(request, response);

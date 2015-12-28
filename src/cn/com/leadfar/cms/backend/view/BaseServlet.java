@@ -2,6 +2,7 @@ package cn.com.leadfar.cms.backend.view;
 
 import cn.com.leadfar.cms.SystemContext;
 import cn.com.leadfar.cms.utils.BeanFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -50,6 +51,10 @@ public class BaseServlet extends HttpServlet {
 			//取出offset,pagesize,设置到TheadLocal中
 			SystemContext.setOffset(getOffset(req));
 			SystemContext.setPagesize(getPagesize(req));
+			boolean isMultipart = ServletFileUpload.isMultipartContent(req);
+			if(isMultipart){//如果是上传文件
+				req = new MultipartRequestWrapper(req);
+			}
 			//执行父类的职责，根据请求时get还是post，决定调用doGet还是doPost方法
 			super.service(req, resp);
 		}finally {

@@ -165,6 +165,11 @@ fieldset div {
 			<textarea rows="20" cols="100" name="content" id="content"></textarea>
 			<br />	
 		</div>
+		<div>
+			<label for="attachs">选择附件</label>
+			<input type="file" id="attachs" name="attachs" >
+			<br />
+		</div>
 		<div class="enter">
 		    <input name="submit" type="submit" class="buttom" value="提交" />
 		    <input name="reset" type="reset" class="buttom" value="重置" />

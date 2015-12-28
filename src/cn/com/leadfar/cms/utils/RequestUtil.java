@@ -25,7 +25,7 @@ public class RequestUtil {
          for (Iterator iterator = entries.iterator();iterator.hasNext();){
              Map.Entry entry = (Map.Entry)iterator.next();
              String name = (String) entry.getKey();
-             String[] value = (String[]) entry.getValue();
+             Object[] value = (Object[]) entry.getValue();
              if (value!=null){
                  if (value.length==1){
                      BeanUtils.copyProperty(entity,name,value[0]);
