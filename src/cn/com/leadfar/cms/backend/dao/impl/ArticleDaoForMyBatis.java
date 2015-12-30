@@ -3,12 +3,15 @@ package cn.com.leadfar.cms.backend.dao.impl;
 import cn.com.leadfar.cms.SystemContext;
 import cn.com.leadfar.cms.backend.dao.ArticleDao;
 import cn.com.leadfar.cms.backend.model.Article;
+import cn.com.leadfar.cms.backend.model.Attachment;
 import cn.com.leadfar.cms.backend.model.Channel;
+import cn.com.leadfar.cms.backend.model.Comment;
 import cn.com.leadfar.cms.backend.vo.PageVO;
 import cn.com.leadfar.cms.utils.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 
 import java.awt.datatransfer.StringSelection;
+import java.io.File;
 import java.util.*;
 
 /**
@@ -32,13 +35,23 @@ public class ArticleDaoForMyBatis extends BaseDao implements ArticleDao {
                     session.insert(Article.class.getName() + ".insert_channel_article", param);
                 }
                 //插入文章和关键字的关联
-               if(a.getKeyword()!=null&& !a.getKeyword().trim().equals("")){
-                   String[] keywords = a.getKeyword().split(",| ");
-                   for (String kw:keywords){
-                       Map param =new HashMap();
-                       param.put("kw",kw);
-                       param.put("a",a);
-                       session.insert(Article.class.getName()+".insert_article_keyword",param);
+                if(a.getKeyword()!=null&& !a.getKeyword().trim().equals("")){
+                    String[] keywords = a.getKeyword().split(",| ");
+                    for (String kw:keywords){
+                        Map param =new HashMap();
+                        param.put("kw",kw);
+                        param.put("a",a);
+                        session.insert(Article.class.getName()+".insert_article_keyword",param);
+                    }
+                }
+                //插入文章和附件间的关联
+               if (a.getAttachments()!=null){
+                   List attachments = a.getAttachments();
+                   for (Iterator iterator=attachments.iterator();iterator.hasNext();){
+                       Attachment attachment= (Attachment) iterator.next();
+                       attachment.setArticleId(a.getId());
+                       attachment.setUploadTime(new Date());
+                       session.insert(Article.class.getName()+".insert_attachment",attachment);
                    }
                }
                 //提交
@@ -58,9 +71,25 @@ public class ArticleDaoForMyBatis extends BaseDao implements ArticleDao {
         SqlSession session = MyBatisUtil.getSession();
         try {
             for (String id : ids) {
-                session.delete(Article.class.getName() + ".delArticles", Integer.parseInt(id));
-                session.delete(Article.class.getName() + ".delChannel_Articles", Integer.parseInt(id));
-                session.delete(Article.class.getName() + ".delKeyword_Article", Integer.parseInt(id));
+                int articleId = Integer.parseInt(id);
+                //删除文章和频道之间的联系
+                session.delete(Article.class.getName() + ".delChannel_Articles", articleId);
+                //删除文章和关键字之间的联系
+                session.delete(Article.class.getName() + ".delKeyword_Article", articleId);
+                //删除文章对应的评论
+                session.delete(Comment.class.getName()+".delByArticleId",articleId);
+                //删除文章对应的附件
+                Article article  = (Article) session.selectOne(Article.class.getName() + ".findById", articleId);
+                List attachments = article.getAttachments();
+                for (Iterator iterator= attachments.iterator();iterator.hasNext();){
+                    Attachment attachment = (Attachment) iterator.next();
+                    String realPath = Attachment.ATTACHMENT_DIR+attachment.getName();
+                    new File(realPath).delete();//删除磁盘上的文件
+                }
+                //删除数据库中的附件
+                session.delete(Article.class.getName()+"delAttachmentByArticleId",articleId);
+                //删除文章
+                session.delete(Article.class.getName() + ".delArticles",articleId );
             }
             session.commit();
         } catch (Exception e) {
@@ -71,6 +100,27 @@ public class ArticleDaoForMyBatis extends BaseDao implements ArticleDao {
             session.close();
         }
 
+    }
+
+    @Override
+    public void delAttachmentById(int attachmentId) {
+        SqlSession session = MyBatisUtil.getSession();
+        try {
+            //首先查出Attachment对象
+            Attachment attachment= (Attachment) session.selectOne(Article.class.getName() + ".findAttachmentById", attachmentId);
+            //删除磁盘中的附件
+            String realPath = Attachment.ATTACHMENT_DIR+attachment.getName();
+            new File(realPath).delete();
+            //删除数据库中的附件信息
+           session.delete(Article.class.getName()+".delAttachmentById",attachmentId);
+            session.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.rollback();
+        } finally {
+            //关闭
+            session.close();
+        }
     }
 
     @Override
@@ -156,8 +206,17 @@ public class ArticleDaoForMyBatis extends BaseDao implements ArticleDao {
                     param.put("c", c);
                     session.insert(Article.class.getName() + ".insert_channel_article", param);
                 }
-                session.commit();
             }
+            if (a.getAttachments()!= null){
+                List attachments = a.getAttachments();
+                for (Iterator iterator = attachments.iterator();iterator.hasNext();){
+                    Attachment attachment= (Attachment) iterator.next();
+                    attachment.setId(a.getId());
+                    attachment.setUploadTime(new Date());
+                    session.insert(Article.class.getName()+"insert_attachment",attachment);
+                }
+            }
+            session.commit();
         } catch (Exception e) {
             e.printStackTrace();
             session.rollback();

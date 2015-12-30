@@ -41,6 +41,15 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/backend/*</url-pattern>
     </filter-mapping>
+
+    <filter>
+        <filter-name>AttachmentFilter</filter-name>
+        <filter-class>cn.com.leadfar.cms.backend.view.AttachmentFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AttachmentFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <filter>
         <filter-name>LoginFilter</filter-name>
         <filter-class>cn.com.leadfar.cms.backend.view.LoginFilter</filter-class>

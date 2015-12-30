@@ -12,6 +12,11 @@ import java.util.List;
 public interface ArticleDao {
     public void addArticle(Article a);
     public void delArticles(String[] ids);
+    /**
+     * 根据attachmentId删除附件
+     * @param attachmentId
+     */
+    public void delAttachmentById(int attachmentId);
     public Article findArticleById(int id);
     public PageVO findArticles(String title);
     public PageVO findArticles(Channel channel);

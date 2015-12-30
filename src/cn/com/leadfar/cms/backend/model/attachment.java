@@ -16,6 +16,9 @@ public class Attachment {
     private String contentType;
     //文件上传时间
     private Date uploadTime;
+    public boolean isImage(){
+        return contentType.startsWith("image");
+    }
 
     public int getArticleId() {
         return articleId;

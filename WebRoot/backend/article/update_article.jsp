@@ -96,11 +96,47 @@ fieldset div {
 
 -->
 </style>
+	<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+	<script type="text/javascript">
+		function initCkeditor(){
+			CKEDITOR.replace('content',
+					{
+						skin:'office2003'
+					}
+			);
+		}
+		function insertFile(value) {
+			// Get the editor instance that we want to interact with.
+			var editor = CKEDITOR.instances.content;
+			// Check the active editing mode.
+			if ( editor.mode == 'wysiwyg' )
+			{
+				// Insert HTML code.
+				// http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-insertHtml
+				editor.insertHtml( "<a href='upload_file/"+value+"'>"+value+"</a>" );
+			}
+			else
+				alert( 'You must be in WYSIWYG mode!' );
+		}
+		function insertImage(value) {
+			// Get the editor instance that we want to interact with.
+			var editor = CKEDITOR.instances.content;
+			// Check the active editing mode.
+			if ( editor.mode == 'wysiwyg' )
+			{
+				// Insert HTML code.
+				// http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-insertHtml
+				editor.insertHtml( "<img src = 'upload_image/"+value+"' title='"+value+"'>");
+			}
+			else
+				alert( 'You must be in WYSIWYG mode!' );
+		}
+	</script>
 </head>
-<body>
+<body onload="initCkeditor()">
 <div id="formwrapper">
 	<h3>更新网站文章</h3>
-	<form action="ArticleServlet" method="post">
+	<form action="ArticleServlet" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="method" value="openUpdate">
 		<%--隐藏域，不需要给用户看见--%>
 		<input type="hidden" name ="id" value="${article.id}">
@@ -121,10 +157,28 @@ fieldset div {
 			<textarea rows="20" cols="100" name="content" id="content">${article.content}</textarea>
 			<br />
 		</div>
+		<div>
+			<label for="attachs">选择附件</label>
+			<c:forEach items="${article.attachments}" var="a">
+				<c:choose>
+					<c:when test="${a.image}">
+						<a href="javascript:insertImage('${a.name}')">${a.name}</a>
+					</c:when>
+					<c:otherwise>
+						<a href="javascript:insertFile('${a.name}')">${a.name}</a>
+					</c:otherwise>
+
+				</c:choose>
+				<a href="ArticleServlet?method=delAttachment&attachmentId=${a.id}">删除</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+			</c:forEach>
+			<input type="file" id="attachs" name="attachs" >
+			<br />
+		</div>
 		<div class="enter">
 		    <input name="submit" type="submit" class="buttom" value="提交" />
 		    <input name="reset" type="reset" class="buttom" value="重置" />
-		    <input name="return" type="button" class="buttom" value="返回列表页面" onclick="window.location = 'SearchArticlesServlet'"/>
+		    <input name="return" type="button" class="buttom" value="返回列表页面" onclick="window.location = 'ArticleServlet'"/>
 		</div>
 	</fieldset>
 	</form>

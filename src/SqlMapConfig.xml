@@ -9,6 +9,7 @@
         <typeAlias type="cn.com.leadfar.cms.backend.model.Channel" alias="Channel"/>
         <typeAlias type="cn.com.leadfar.cms.backend.model.Member" alias="Member"/>
         <typeAlias type="cn.com.leadfar.cms.backend.model.Comment" alias="Comment"/>
+        <typeAlias type="cn.com.leadfar.cms.backend.model.Attachment" alias="Attachment"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">

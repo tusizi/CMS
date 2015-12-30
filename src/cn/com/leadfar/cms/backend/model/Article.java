@@ -1,6 +1,8 @@
 package cn.com.leadfar.cms.backend.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -25,6 +27,13 @@ public class Article {
     private Set<Channel> channels;//所属频道set为无序的集合
     private int topicId;//文章所属的主题，如果不属于某个主题，则此值为0
     private int adminId;//文章由哪个管理员创建
+    private List<Attachment> attachments;//文章对应的附件
+    public void addAttachment(Attachment attachment){
+        if (attachments == null){
+            attachments = new ArrayList();
+        }
+        attachments.add(attachment);
+    }
 
     public int getAdminId() {
         return adminId;
@@ -168,5 +177,13 @@ public class Article {
 
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
+    }
+
+    public List<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
     }
 }

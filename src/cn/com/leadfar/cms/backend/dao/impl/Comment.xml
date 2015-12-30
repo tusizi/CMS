@@ -18,8 +18,11 @@
     <select id="findById" parameterType="int" resultType="Comment">
         select * from t_comment where id = #{id}
     </select>
-    <delete id=".del" parameterType="int">
+    <delete id="del" parameterType="int">
         delect from t_comment where id =#{id}
+    </delete>
+    <delete id="delByArticleId" parameterType="int">
+        delect from t_comment where articleId =#{id}
     </delete>
 </mapper>
 
