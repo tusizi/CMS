@@ -14,8 +14,8 @@ public class PropertiesBeanFactory implements BeanFactory {
     }
     public PropertiesBeanFactory(String  configurationFile){
         try {
+            //读取配置文件，得到具体DAO的实现类名，专门读取配置文件的
             Properties props = new Properties();
-            //读取配置文件，得到具体DAO的实现类名
             props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream(configurationFile));
             //根据配置文件，初始化所有的DAO对象
              Set set = props.entrySet();//properties其实就是一个map，map里有entrySet这个方法，就是一个名值对（key,value）

@@ -23,8 +23,8 @@ public class BaseServlet extends HttpServlet {
 		System.out.println("调用了BaseServlet中的service方法");
 		//this是多态的，this是具体的子类对象
 		//利用反射机制调用this对象中的相关的setters方法
-		Method[] method = this.getClass().getMethods();
-		for (Method m:method){
+		Method[] methods = this.getClass().getMethods();
+		for (Method m:methods){
 			if(m.getName().startsWith("set")){
 				//System.out.println(m.getName());
 				//ArticleDao

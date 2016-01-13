@@ -49,7 +49,9 @@
     <select id="findById" parameterType="int" resultMap="findById-result">
         select * from t_article where id = #{value}
     </select>
-
+    <select id="findChannelsByArticleId" parameterType="int" resultType="Channel">
+        select * from t_channel c ,t_channel_article ca where c.id=ca.channelId and ca.articleId=#{articleId}
+    </select>
 
     <select id="findArticlesByTitle" parameterType="map" resultType="Article">
         select * from t_article

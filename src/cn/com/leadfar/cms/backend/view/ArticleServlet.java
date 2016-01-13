@@ -112,7 +112,7 @@ public class ArticleServlet extends BaseServlet {
 
     /**
      * 打开更新界面
-     * @param request
+     * @param request'
      * @param response
      * @throws ServletException
      * @throws IOException

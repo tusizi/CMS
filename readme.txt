@@ -32,7 +32,7 @@ url-pattern 的定义只有三种形式：
 
    完成频道管理功能，--id,name,description
 
-   完成分页处理的功能  limit
+   完成分页处理的功能  limit 利用数据库进行分页  offset从第几页开始查询
 
    引入page-taglib分页
 
