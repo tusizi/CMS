@@ -28,7 +28,7 @@ public class RequestUtil {
              Object[] value = (Object[]) entry.getValue();
              if (value!=null){
                  if (value.length==1){
-                     BeanUtils.copyProperty(entity,name,value[0]);
+                     BeanUtils .copyProperty(entity, name, value[0]);
                  }else {
                      BeanUtils.copyProperty(entity,name,value);
                  }

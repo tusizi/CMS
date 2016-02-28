@@ -4,7 +4,6 @@ import cn.com.leadfar.cms.backend.model.Attachment;
 import org.apache.commons.io.FileUtils;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -14,7 +13,6 @@ import java.net.URLDecoder;
 /**
  * Created by tusizi on 2015/12/30.
  */
-@WebFilter(filterName = "AttachmentFilter")
 public class AttachmentFilter implements Filter {
     public void destroy() {
     }

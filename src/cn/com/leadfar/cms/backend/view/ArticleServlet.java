@@ -48,7 +48,10 @@ public class ArticleServlet extends BaseServlet {
         System.out.println("add");
         Article a = (Article)RequestUtil.copyParam(Article.class, request);
         //拿到文件的相关信息????????
-        Attachment[] attachments=(Attachment[])request.getParameterMap().get("attachs");
+        Attachment[] attachments=
+                (Attachment[])RequestUtil.copyParam(Attachment[].class,request);
+
+//                        (Attachment[])request.getParameterMap().get("attachs");
         if(attachments!=null){
             for (Attachment atta:attachments){
                 System.out.println(atta.getName()+"文件已经上传,类型是"+atta.getContentType());
@@ -137,19 +140,19 @@ public class ArticleServlet extends BaseServlet {
      * @throws ServletException
      * @throws IOException
      */
-    public void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        Article a  = (Article) RequestUtil.copyParam(Article.class,request);
-        articleDao.updateArticle(a);
-        Attachment[] attachments = (Attachment)request.getParameterMap().get("attachs");
-        if (attachments!=null){
-            for (Attachment atta:attachments){
-                a.addAttachment(atta);
-            }
-        }
-        //farword 到更新成功的界面
-        request.getRequestDispatcher("/backend/article/update_article_success.jsp").forward(request, response);
-    }
+//    public void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//
+//        Article a  = (Article) RequestUtil.copyParam(Article.class,request);
+//        articleDao.updateArticle(a);
+//        Attachment[] attachments = (Attachment)request.getParameterMap().get("attachs");
+//        if (attachments!=null){
+//            for (Attachment atta:attachments){
+//                a.addAttachment(atta);
+//            }
+//        }
+//        //farword 到更新成功的界面
+//        request.getRequestDispatcher("/backend/article/update_article_success.jsp").forward(request, response);
+//    }
 
     /**
      * 本set方法，定义了一个articleDao这样的一个property

@@ -10,7 +10,7 @@ import cn.com.leadfar.cms.backend.vo.PageVO;
 public interface MemberDao {
     public void addMember(Member member);
     public Member findMemberByNickname(String nickname);
-    public Object findMemberById(int id);
+    public Member findMemberById(int id);
     public void updateMember(Member member);
     public void updateMemberPassword(int id,String oldPassword,String newPassword );
     public PageVO findAllMembers();
